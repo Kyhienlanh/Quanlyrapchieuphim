@@ -121,16 +121,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\BaoCaoThongKeController.cs" />
-    <Compile Include="Controllers\ChitietphimController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaoCaoThongKeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChiTietPhimController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyLichChieuPhimController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyPhimController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyTaiKhoanController.cs" />
     <Compile Include="Controllers\DatveController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\PhimController.cs" />
-    <Compile Include="Controllers\QuanLyLichChieuPhimController.cs" />
-    <Compile Include="Controllers\QuanLyPhimController.cs" />
-    <Compile Include="Controllers\QuanLyTaiKhoanController.cs" />
     <Compile Include="Controllers\SuatchieuController.cs" />
     <Compile Include="Controllers\ThanhtoanController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -175,6 +175,7 @@
       <LastGenOutput>Quanlyrapphim.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Models\Quanlyrapphim.dbml.layout">
       <DependentUpon>Quanlyrapphim.dbml</DependentUpon>
     </None>
@@ -206,6 +207,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Admin\" />
+    <Folder Include="Areas\Admin\Views\BaoCaoThongKe\" />
+    <Folder Include="Areas\Admin\Views\ChiTietPhim\" />
+    <Folder Include="Areas\Admin\Views\QuanLyLichChieuPhim\" />
+    <Folder Include="Areas\Admin\Views\QuanLyPhim\" />
+    <Folder Include="Areas\Admin\Views\QuanLyTaiKhoan\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Content\css\" />
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\IMG\" />

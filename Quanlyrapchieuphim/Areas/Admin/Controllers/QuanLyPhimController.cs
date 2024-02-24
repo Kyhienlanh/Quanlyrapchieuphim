@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Quanlyrapchieuphim.Controllers
+namespace Quanlyrapchieuphim.Areas.Admin.Controllers
 {
-    public class ChitietphimController : Controller
+    public class QuanLyPhimController : Controller
     {
-        // GET: Chitietphim
+        // GET: Admin/QuanLyPhim
         public ActionResult Index()
         {
             return View();
