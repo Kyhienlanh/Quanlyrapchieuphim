@@ -10,10 +10,12 @@ namespace Quanlyrapchieuphim.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        private QLRapChieuPhimEntities1 a = new QLRapChieuPhimEntities1();
+        private QLRapChieuPhim1Entities1 a = new QLRapChieuPhim1Entities1();
+                
 
         public ActionResult Index()
         {
+
             
             return View();
         }

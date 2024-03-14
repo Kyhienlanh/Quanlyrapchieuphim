@@ -4,26 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b93b54adaa0a40deb127630ea0c28d87" Name="Diagram1">
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.BinhLuan" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.ChoNgoi1" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.DichVu1" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.HoaDon" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.NguoiDung" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.Phim" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.PhongChieu" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.SuatChieu" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLRapChieuPhimModel.Ve" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_BinhLuan_NguoiDung" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_BinhLuan_Phim" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_Ve_ChoNgoi1" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_HoaDon_Ve" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_Ve_NguoiDung" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_SuatChieu_Phim" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_SuatChieu_PhongChieu" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.FK_Ve_SuatChieu" ManuallyRouted="false" />
-        <AssociationConnector Association="QLRapChieuPhimModel.DichVu_Ve" ManuallyRouted="false" />
+      <Diagram DiagramId="f246a9c11be1406eb5e522a0d7fc58d4" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.ChoNgoi" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.ChoNgoi_SuatChieu" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.DichVu" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.HoaDon" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.NguoiDung" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.Phim" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.PhongChieu" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.SuatChieu" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.sysdiagram" Width="1.5" PointX="2.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLRapChieuPhim1Model.Ve1" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="QLRapChieuPhim1Model.FK_ChoNgoi_SuatChieu_ChoNgoi" ManuallyRouted="false" />
+        <AssociationConnector Association="QLRapChieuPhim1Model.FK_ChoNgoi_SuatChieu_SuatChieu" ManuallyRouted="false" />
+        <AssociationConnector Association="QLRapChieuPhim1Model.FK_HoaDon_Ve1" ManuallyRouted="false" />
+        <AssociationConnector Association="QLRapChieuPhim1Model.FK_Ve1_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="QLRapChieuPhim1Model.FK_SuatChieu_Phim" ManuallyRouted="false" />
+        <AssociationConnector Association="QLRapChieuPhim1Model.FK_SuatChieu_PhongChieu" ManuallyRouted="false" />
+        <AssociationConnector Association="QLRapChieuPhim1Model.FK_Ve1_SuatChieu" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

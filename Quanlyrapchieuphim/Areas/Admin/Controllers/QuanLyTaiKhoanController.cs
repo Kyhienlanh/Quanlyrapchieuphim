@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quanlyrapchieuphim.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,12 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
     public class QuanLyTaiKhoanController : Controller
     {
         // GET: Admin/QuanLyTaiKhoan
+        private QLRapChieuPhim1Entities1 db= new QLRapChieuPhim1Entities1 ();
         public ActionResult Index()
         {
-            return View();
+            var data = db.NguoiDungs;
+            return View(data);
         }
+
     }
 }

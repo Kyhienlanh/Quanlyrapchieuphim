@@ -14,13 +14,13 @@ namespace Quanlyrapchieuphim.Models
     
     public partial class HoaDon
     {
-        public string IDHoaDon { get; set; }
+        public int IDHoaDon { get; set; }
         public string TenHoaDon { get; set; }
-        public Nullable<double> TongTien { get; set; }
+        public double TongTien { get; set; }
         public string GhiChu { get; set; }
-        public Nullable<System.DateTime> NgayTao { get; set; }
-        public string IDVe { get; set; }
+        public System.DateTime NgayTao { get; set; }
+        public Nullable<int> IDVe { get; set; }
     
-        public virtual Ve Ve { get; set; }
+        public virtual Ve1 Ve1 { get; set; }
     }
 }

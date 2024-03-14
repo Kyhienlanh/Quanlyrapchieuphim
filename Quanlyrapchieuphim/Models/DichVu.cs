@@ -12,16 +12,10 @@ namespace Quanlyrapchieuphim.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BinhLuan
+    public partial class DichVu
     {
-        public string IDDanhGiaPhim { get; set; }
-        public string BinhLuan1 { get; set; }
-        public Nullable<int> DanhGiaSao { get; set; }
-        public Nullable<System.DateTime> ThoiGian { get; set; }
-        public string IDNguoiDung { get; set; }
-        public string IDPhim { get; set; }
-    
-        public virtual NguoiDung NguoiDung { get; set; }
-        public virtual Phim Phim { get; set; }
+        public int IDDichVu { get; set; }
+        public string TenDichVu { get; set; }
+        public double GiaTien { get; set; }
     }
 }

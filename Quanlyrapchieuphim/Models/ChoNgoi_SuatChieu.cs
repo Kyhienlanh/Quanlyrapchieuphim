@@ -12,18 +12,14 @@ namespace Quanlyrapchieuphim.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChoNgoi1
+    public partial class ChoNgoi_SuatChieu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ChoNgoi1()
-        {
-            this.Ves = new HashSet<Ve>();
-        }
+        public int IDChoNgoi_SuatChieu { get; set; }
+        public string Trangthai { get; set; }
+        public int IDSuatChieu { get; set; }
+        public int IDChoNgoi { get; set; }
     
-        public string IDChoNgoi { get; set; }
-        public string TenChoNgoi { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ve> Ves { get; set; }
+        public virtual ChoNgoi ChoNgoi { get; set; }
+        public virtual SuatChieu SuatChieu { get; set; }
     }
 }

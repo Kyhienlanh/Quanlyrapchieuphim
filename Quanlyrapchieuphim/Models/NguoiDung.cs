@@ -17,11 +17,10 @@ namespace Quanlyrapchieuphim.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NguoiDung()
         {
-            this.BinhLuans = new HashSet<BinhLuan>();
-            this.Ves = new HashSet<Ve>();
+            this.Ve1 = new HashSet<Ve1>();
         }
     
-        public string IDNguoiDung { get; set; }
+        public int IDNguoiDung { get; set; }
         public string TenNguoiDung { get; set; }
         public string TenChucVu { get; set; }
         public string DiaChi { get; set; }
@@ -30,10 +29,9 @@ namespace Quanlyrapchieuphim.Models
         public string UserName { get; set; }
         public string HashPass { get; set; }
         public string Quyen { get; set; }
+        public string LoaiDangNhap { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BinhLuan> BinhLuans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ve> Ves { get; set; }
+        public virtual ICollection<Ve1> Ve1 { get; set; }
     }
 }

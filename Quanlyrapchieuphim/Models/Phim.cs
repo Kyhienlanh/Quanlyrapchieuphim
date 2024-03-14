@@ -17,21 +17,19 @@ namespace Quanlyrapchieuphim.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Phim()
         {
-            this.BinhLuans = new HashSet<BinhLuan>();
             this.SuatChieux = new HashSet<SuatChieu>();
         }
     
-        public string IDPhim { get; set; }
+        public int IDPhim { get; set; }
         public string TenPhim { get; set; }
+        public string TenAnh { get; set; }
         public string TheLoai { get; set; }
-        public Nullable<int> ThoiLuong { get; set; }
-        public Nullable<System.DateTime> KhoiChieu { get; set; }
+        public int ThoiLuong { get; set; }
+        public System.DateTime KhoiChieu { get; set; }
         public string NamSanXuat { get; set; }
         public string DaoDien { get; set; }
         public string DienVien { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BinhLuan> BinhLuans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuatChieu> SuatChieux { get; set; }
     }

@@ -15,10 +15,10 @@ namespace Quanlyrapchieuphim.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class QLRapChieuPhimEntities1 : DbContext
+    public partial class QLRapChieuPhim1Entities1 : DbContext
     {
-        public QLRapChieuPhimEntities1()
-            : base("name=QLRapChieuPhimEntities1")
+        public QLRapChieuPhim1Entities1()
+            : base("name=QLRapChieuPhim1Entities1")
         {
         }
     
@@ -27,16 +27,16 @@ namespace Quanlyrapchieuphim.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BinhLuan> BinhLuans { get; set; }
-        public virtual DbSet<ChoNgoi1> ChoNgoi1 { get; set; }
-        public virtual DbSet<DichVu1> DichVu1 { get; set; }
+        public virtual DbSet<ChoNgoi> ChoNgois { get; set; }
+        public virtual DbSet<ChoNgoi_SuatChieu> ChoNgoi_SuatChieu { get; set; }
+        public virtual DbSet<DichVu> DichVus { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<Phim> Phims { get; set; }
         public virtual DbSet<PhongChieu> PhongChieux { get; set; }
         public virtual DbSet<SuatChieu> SuatChieux { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Ve> Ves { get; set; }
+        public virtual DbSet<Ve1> Ve1 { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

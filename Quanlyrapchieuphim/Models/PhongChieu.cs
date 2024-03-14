@@ -20,7 +20,7 @@ namespace Quanlyrapchieuphim.Models
             this.SuatChieux = new HashSet<SuatChieu>();
         }
     
-        public string IDPhongChieu { get; set; }
+        public int IDPhongChieu { get; set; }
         public string TenPhongChieu { get; set; }
         public string LoaiPhong { get; set; }
     

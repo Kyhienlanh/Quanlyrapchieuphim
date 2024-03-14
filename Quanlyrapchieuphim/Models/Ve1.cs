@@ -12,29 +12,25 @@ namespace Quanlyrapchieuphim.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ve
+    public partial class Ve1
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ve()
+        public Ve1()
         {
             this.HoaDons = new HashSet<HoaDon>();
-            this.DichVu1 = new HashSet<DichVu1>();
         }
     
-        public string IDVe { get; set; }
+        public int IDVe { get; set; }
         public string TenVe { get; set; }
         public Nullable<double> GiaVe { get; set; }
         public string TrangThai { get; set; }
-        public string IDChoNgoi { get; set; }
-        public string IDSuatChieu { get; set; }
-        public string IDNguoiDung { get; set; }
+        public Nullable<int> IDChoNgoi_SuatChieu { get; set; }
+        public Nullable<int> IDSuatChieu { get; set; }
+        public Nullable<int> IDNguoiDung { get; set; }
     
-        public virtual ChoNgoi1 ChoNgoi1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
         public virtual SuatChieu SuatChieu { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DichVu1> DichVu1 { get; set; }
     }
 }
