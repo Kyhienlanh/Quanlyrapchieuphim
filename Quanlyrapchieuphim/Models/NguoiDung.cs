@@ -30,6 +30,8 @@ namespace Quanlyrapchieuphim.Models
         public string HashPass { get; set; }
         public string Quyen { get; set; }
         public string LoaiDangNhap { get; set; }
+        public string XacNhanEmail { get; set; }
+        public string MaXacNhan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve1> Ve1 { get; set; }

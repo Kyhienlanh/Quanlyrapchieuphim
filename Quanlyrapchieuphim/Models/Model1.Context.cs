@@ -15,10 +15,10 @@ namespace Quanlyrapchieuphim.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class QLRapChieuPhim1Entities1 : DbContext
+    public partial class QLRapChieuPhim1Entities : DbContext
     {
-        public QLRapChieuPhim1Entities1()
-            : base("name=QLRapChieuPhim1Entities1")
+        public QLRapChieuPhim1Entities()
+            : base("name=QLRapChieuPhim1Entities")
         {
         }
     
@@ -37,6 +37,7 @@ namespace Quanlyrapchieuphim.Models
         public virtual DbSet<SuatChieu> SuatChieux { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ve1> Ve1 { get; set; }
+        public virtual DbSet<DV_VE> DV_VE { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

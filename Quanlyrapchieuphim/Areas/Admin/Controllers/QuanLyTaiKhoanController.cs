@@ -10,7 +10,7 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
     public class QuanLyTaiKhoanController : Controller
     {
         // GET: Admin/QuanLyTaiKhoan
-        private QLRapChieuPhim1Entities1 db= new QLRapChieuPhim1Entities1 ();
+        private QLRapChieuPhim1Entities db= new QLRapChieuPhim1Entities();
         public ActionResult Index()
         {
             var data = db.NguoiDungs;

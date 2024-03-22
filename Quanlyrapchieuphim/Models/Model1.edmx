@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QLRapChieuPhim1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QLRapChieuPhim1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChoNgoi">
           <Key>
             <PropertyRef Name="IDChoNgoi" />
@@ -29,12 +29,14 @@
           <Property Name="TenDichVu" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GiaTien" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QLRapChieuPhim1.dbo.DichVu_Ve' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="DichVu_Ve">
+        <EntityType Name="DV_VE">
+          <Key>
+            <PropertyRef Name="IDDV_VE" />
+          </Key>
           <Property Name="IDDichVu" Type="int" />
           <Property Name="IDVe" Type="int" />
-        </EntityType>-->
+          <Property Name="IDDV_VE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="HoaDon">
           <Key>
             <PropertyRef Name="IDHoaDon" />
@@ -60,6 +62,8 @@ warning 6013: The table/view 'QLRapChieuPhim1.dbo.DichVu_Ve' does not have a pri
           <Property Name="HashPass" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Quyen" Type="nvarchar" MaxLength="20" />
           <Property Name="LoaiDangNhap" Type="nvarchar" MaxLength="50" />
+          <Property Name="XacNhanEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaXacNhan" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Phim">
           <Key>
@@ -140,12 +144,30 @@ warning 6013: The table/view 'QLRapChieuPhim1.dbo.DichVu_Ve' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_DichVu_Ve_DichVu" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_DichVu_Ve_Ve1" />-->
+        <Association Name="FK_DV_VE_DichVu">
+          <End Role="DichVu" Type="Self.DichVu" Multiplicity="0..1" />
+          <End Role="DV_VE" Type="Self.DV_VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DichVu">
+              <PropertyRef Name="IDDichVu" />
+            </Principal>
+            <Dependent Role="DV_VE">
+              <PropertyRef Name="IDDichVu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DV_VE_Ve1">
+          <End Role="Ve1" Type="Self.Ve1" Multiplicity="0..1" />
+          <End Role="DV_VE" Type="Self.DV_VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ve1">
+              <PropertyRef Name="IDVe" />
+            </Principal>
+            <Dependent Role="DV_VE">
+              <PropertyRef Name="IDVe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HoaDon_Ve1">
           <End Role="Ve1" Type="Self.Ve1" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
@@ -241,6 +263,7 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           <EntitySet Name="ChoNgoi" EntityType="Self.ChoNgoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChoNgoi_SuatChieu" EntityType="Self.ChoNgoi_SuatChieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DichVu" EntityType="Self.DichVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DV_VE" EntityType="Self.DV_VE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phim" EntityType="Self.Phim" Schema="dbo" store:Type="Tables" />
@@ -255,6 +278,14 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           <AssociationSet Name="FK_ChoNgoi_SuatChieu_SuatChieu" Association="Self.FK_ChoNgoi_SuatChieu_SuatChieu">
             <End Role="SuatChieu" EntitySet="SuatChieu" />
             <End Role="ChoNgoi_SuatChieu" EntitySet="ChoNgoi_SuatChieu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DV_VE_DichVu" Association="Self.FK_DV_VE_DichVu">
+            <End Role="DichVu" EntitySet="DichVu" />
+            <End Role="DV_VE" EntitySet="DV_VE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DV_VE_Ve1" Association="Self.FK_DV_VE_Ve1">
+            <End Role="Ve1" EntitySet="Ve1" />
+            <End Role="DV_VE" EntitySet="DV_VE" />
           </AssociationSet>
           <AssociationSet Name="FK_HoaDon_Ve1" Association="Self.FK_HoaDon_Ve1">
             <End Role="Ve1" EntitySet="Ve1" />
@@ -277,8 +308,7 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
             <End Role="Ve1" EntitySet="Ve1" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLRapChieuPhim1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -308,6 +338,7 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           <Property Name="IDDichVu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GiaTien" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DV_VE" Relationship="QLRapChieuPhim1Model.FK_DV_VE_DichVu" FromRole="DichVu" ToRole="DV_VE" />
         </EntityType>
         <EntityType Name="HoaDon">
           <Key>
@@ -335,7 +366,9 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           <Property Name="HashPass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Quyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LoaiDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="XacNhanEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Ve1" Relationship="Self.FK_Ve1_NguoiDung" FromRole="NguoiDung" ToRole="Ve1" />
+          <Property Name="MaXacNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Phim">
           <Key>
@@ -400,6 +433,7 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_Ve1" FromRole="Ve1" ToRole="HoaDon" />
           <NavigationProperty Name="NguoiDung" Relationship="Self.FK_Ve1_NguoiDung" FromRole="Ve1" ToRole="NguoiDung" />
           <NavigationProperty Name="SuatChieu" Relationship="Self.FK_Ve1_SuatChieu" FromRole="Ve1" ToRole="SuatChieu" />
+          <NavigationProperty Name="DV_VE" Relationship="QLRapChieuPhim1Model.FK_DV_VE_Ve1" FromRole="Ve1" ToRole="DV_VE" />
         </EntityType>
         <Association Name="FK_ChoNgoi_SuatChieu_ChoNgoi">
           <End Role="ChoNgoi" Type="Self.ChoNgoi" Multiplicity="1" />
@@ -485,7 +519,7 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QLRapChieuPhim1Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QLRapChieuPhim1Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChoNgois" EntityType="Self.ChoNgoi" />
           <EntitySet Name="ChoNgoi_SuatChieu" EntityType="Self.ChoNgoi_SuatChieu" />
           <EntitySet Name="DichVus" EntityType="Self.DichVu" />
@@ -554,6 +588,15 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="DV_VE" EntityType="QLRapChieuPhim1Model.DV_VE" />
+          <AssociationSet Name="FK_DV_VE_DichVu" Association="QLRapChieuPhim1Model.FK_DV_VE_DichVu">
+            <End Role="DichVu" EntitySet="DichVus" />
+            <End Role="DV_VE" EntitySet="DV_VE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DV_VE_Ve1" Association="QLRapChieuPhim1Model.FK_DV_VE_Ve1">
+            <End Role="Ve1" EntitySet="Ve1" />
+            <End Role="DV_VE" EntitySet="DV_VE" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -566,12 +609,46 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="DV_VE">
+          <Key>
+            <PropertyRef Name="IDDV_VE" />
+          </Key>
+          <Property Name="IDDichVu" Type="Int32" />
+          <Property Name="IDVe" Type="Int32" />
+          <Property Name="IDDV_VE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DichVu" Relationship="QLRapChieuPhim1Model.FK_DV_VE_DichVu" FromRole="DV_VE" ToRole="DichVu" />
+          <NavigationProperty Name="Ve1" Relationship="QLRapChieuPhim1Model.FK_DV_VE_Ve1" FromRole="DV_VE" ToRole="Ve1" />
+        </EntityType>
+        <Association Name="FK_DV_VE_DichVu">
+          <End Type="QLRapChieuPhim1Model.DichVu" Role="DichVu" Multiplicity="0..1" />
+          <End Type="QLRapChieuPhim1Model.DV_VE" Role="DV_VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DichVu">
+              <PropertyRef Name="IDDichVu" />
+            </Principal>
+            <Dependent Role="DV_VE">
+              <PropertyRef Name="IDDichVu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DV_VE_Ve1">
+          <End Type="QLRapChieuPhim1Model.Ve1" Role="Ve1" Multiplicity="0..1" />
+          <End Type="QLRapChieuPhim1Model.DV_VE" Role="DV_VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ve1">
+              <PropertyRef Name="IDVe" />
+            </Principal>
+            <Dependent Role="DV_VE">
+              <PropertyRef Name="IDVe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QLRapChieuPhim1ModelStoreContainer" CdmEntityContainer="QLRapChieuPhim1Entities1">
+        <EntityContainerMapping StorageEntityContainer="QLRapChieuPhim1ModelStoreContainer" CdmEntityContainer="QLRapChieuPhim1Entities">
           <EntitySetMapping Name="ChoNgois">
             <EntityTypeMapping TypeName="QLRapChieuPhim1Model.ChoNgoi">
               <MappingFragment StoreEntitySet="ChoNgoi">
@@ -614,6 +691,7 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           <EntitySetMapping Name="NguoiDungs">
             <EntityTypeMapping TypeName="QLRapChieuPhim1Model.NguoiDung">
               <MappingFragment StoreEntitySet="NguoiDung">
+                <ScalarProperty Name="MaXacNhan" ColumnName="MaXacNhan" />
                 <ScalarProperty Name="IDNguoiDung" ColumnName="IDNguoiDung" />
                 <ScalarProperty Name="TenNguoiDung" ColumnName="TenNguoiDung" />
                 <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
@@ -624,6 +702,7 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
                 <ScalarProperty Name="HashPass" ColumnName="HashPass" />
                 <ScalarProperty Name="Quyen" ColumnName="Quyen" />
                 <ScalarProperty Name="LoaiDangNhap" ColumnName="LoaiDangNhap" />
+                <ScalarProperty Name="XacNhanEmail" ColumnName="XacNhanEmail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -711,6 +790,15 @@ error 6004: The table 'QLRapChieuPhim1.dbo.DichVu_Ve' is referenced by a relatio
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QLRapChieuPhim1Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QLRapChieuPhim1Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="DV_VE">
+            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.DV_VE">
+              <MappingFragment StoreEntitySet="DV_VE">
+                <ScalarProperty Name="IDDV_VE" ColumnName="IDDV_VE" />
+                <ScalarProperty Name="IDVe" ColumnName="IDVe" />
+                <ScalarProperty Name="IDDichVu" ColumnName="IDDichVu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

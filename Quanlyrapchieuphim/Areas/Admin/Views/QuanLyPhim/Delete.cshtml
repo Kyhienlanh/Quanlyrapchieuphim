@@ -1,0 +1,82 @@
+﻿@model Quanlyrapchieuphim.Models.Phim
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Phim</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenPhim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenPhim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenAnh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenAnh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheLoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhoiChieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhoiChieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamSanXuat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamSanXuat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DaoDien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaoDien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienVien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienVien)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
