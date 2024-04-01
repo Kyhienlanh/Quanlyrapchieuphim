@@ -12,14 +12,14 @@
           <Property Name="IDChoNgoi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenChoNgoi" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="ChoNgoi_SuatChieu">
+        <EntityType Name="ChoNgoi__SuatChieu">
           <Key>
-            <PropertyRef Name="IDChoNgoi_SuatChieu" />
+            <PropertyRef Name="ChoNgoi_SuatChieu" />
           </Key>
-          <Property Name="IDChoNgoi_SuatChieu" Type="int" Nullable="false" />
-          <Property Name="Trangthai" Type="nvarchar" MaxLength="50" />
-          <Property Name="IDSuatChieu" Type="int" Nullable="false" />
-          <Property Name="IDChoNgoi" Type="int" Nullable="false" />
+          <Property Name="ChoNgoi_SuatChieu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="trangthai" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDSuatChieu" Type="int" />
+          <Property Name="IDChoNgoi" Type="int" />
         </EntityType>
         <EntityType Name="DichVu">
           <Key>
@@ -120,26 +120,26 @@
           <Property Name="IDSuatChieu" Type="int" />
           <Property Name="IDNguoiDung" Type="int" />
         </EntityType>
-        <Association Name="FK_ChoNgoi_SuatChieu_ChoNgoi">
-          <End Role="ChoNgoi" Type="Self.ChoNgoi" Multiplicity="1" />
-          <End Role="ChoNgoi_SuatChieu" Type="Self.ChoNgoi_SuatChieu" Multiplicity="*" />
+        <Association Name="FK_ChoNgoi__SuatChieu_ChoNgoi">
+          <End Role="ChoNgoi" Type="Self.ChoNgoi" Multiplicity="0..1" />
+          <End Role="ChoNgoi__SuatChieu" Type="Self.ChoNgoi__SuatChieu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ChoNgoi">
               <PropertyRef Name="IDChoNgoi" />
             </Principal>
-            <Dependent Role="ChoNgoi_SuatChieu">
+            <Dependent Role="ChoNgoi__SuatChieu">
               <PropertyRef Name="IDChoNgoi" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ChoNgoi_SuatChieu_SuatChieu">
-          <End Role="SuatChieu" Type="Self.SuatChieu" Multiplicity="1" />
-          <End Role="ChoNgoi_SuatChieu" Type="Self.ChoNgoi_SuatChieu" Multiplicity="*" />
+        <Association Name="FK_ChoNgoi__SuatChieu_SuatChieu">
+          <End Role="SuatChieu" Type="Self.SuatChieu" Multiplicity="0..1" />
+          <End Role="ChoNgoi__SuatChieu" Type="Self.ChoNgoi__SuatChieu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SuatChieu">
               <PropertyRef Name="IDSuatChieu" />
             </Principal>
-            <Dependent Role="ChoNgoi_SuatChieu">
+            <Dependent Role="ChoNgoi__SuatChieu">
               <PropertyRef Name="IDSuatChieu" />
             </Dependent>
           </ReferentialConstraint>
@@ -261,7 +261,7 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="QLRapChieuPhim1ModelStoreContainer">
           <EntitySet Name="ChoNgoi" EntityType="Self.ChoNgoi" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChoNgoi_SuatChieu" EntityType="Self.ChoNgoi_SuatChieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChoNgoi__SuatChieu" EntityType="Self.ChoNgoi__SuatChieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DichVu" EntityType="Self.DichVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DV_VE" EntityType="Self.DV_VE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
@@ -271,13 +271,13 @@
           <EntitySet Name="SuatChieu" EntityType="Self.SuatChieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ve1" EntityType="Self.Ve1" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ChoNgoi_SuatChieu_ChoNgoi" Association="Self.FK_ChoNgoi_SuatChieu_ChoNgoi">
+          <AssociationSet Name="FK_ChoNgoi__SuatChieu_ChoNgoi" Association="Self.FK_ChoNgoi__SuatChieu_ChoNgoi">
             <End Role="ChoNgoi" EntitySet="ChoNgoi" />
-            <End Role="ChoNgoi_SuatChieu" EntitySet="ChoNgoi_SuatChieu" />
+            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
           </AssociationSet>
-          <AssociationSet Name="FK_ChoNgoi_SuatChieu_SuatChieu" Association="Self.FK_ChoNgoi_SuatChieu_SuatChieu">
+          <AssociationSet Name="FK_ChoNgoi__SuatChieu_SuatChieu" Association="Self.FK_ChoNgoi__SuatChieu_SuatChieu">
             <End Role="SuatChieu" EntitySet="SuatChieu" />
-            <End Role="ChoNgoi_SuatChieu" EntitySet="ChoNgoi_SuatChieu" />
+            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
           </AssociationSet>
           <AssociationSet Name="FK_DV_VE_DichVu" Association="Self.FK_DV_VE_DichVu">
             <End Role="DichVu" EntitySet="DichVu" />
@@ -318,18 +318,7 @@
           </Key>
           <Property Name="IDChoNgoi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenChoNgoi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ChoNgoi_SuatChieu" Relationship="Self.FK_ChoNgoi_SuatChieu_ChoNgoi" FromRole="ChoNgoi" ToRole="ChoNgoi_SuatChieu" />
-        </EntityType>
-        <EntityType Name="ChoNgoi_SuatChieu">
-          <Key>
-            <PropertyRef Name="IDChoNgoi_SuatChieu" />
-          </Key>
-          <Property Name="IDChoNgoi_SuatChieu" Type="Int32" Nullable="false" />
-          <Property Name="Trangthai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDSuatChieu" Type="Int32" Nullable="false" />
-          <Property Name="IDChoNgoi" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ChoNgoi" Relationship="Self.FK_ChoNgoi_SuatChieu_ChoNgoi" FromRole="ChoNgoi_SuatChieu" ToRole="ChoNgoi" />
-          <NavigationProperty Name="SuatChieu" Relationship="Self.FK_ChoNgoi_SuatChieu_SuatChieu" FromRole="ChoNgoi_SuatChieu" ToRole="SuatChieu" />
+          <NavigationProperty Name="ChoNgoi__SuatChieu" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_ChoNgoi" FromRole="ChoNgoi" ToRole="ChoNgoi__SuatChieu" />
         </EntityType>
         <EntityType Name="DichVu">
           <Key>
@@ -404,10 +393,10 @@
           <Property Name="ThoiGianChieu" Type="Time" Nullable="false" Precision="7" />
           <Property Name="IDPhongChieu" Type="Int32" Nullable="false" />
           <Property Name="IDPhim" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ChoNgoi_SuatChieu" Relationship="Self.FK_ChoNgoi_SuatChieu_SuatChieu" FromRole="SuatChieu" ToRole="ChoNgoi_SuatChieu" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_SuatChieu_Phim" FromRole="SuatChieu" ToRole="Phim" />
           <NavigationProperty Name="PhongChieu" Relationship="Self.FK_SuatChieu_PhongChieu" FromRole="SuatChieu" ToRole="PhongChieu" />
           <NavigationProperty Name="Ve1" Relationship="Self.FK_Ve1_SuatChieu" FromRole="SuatChieu" ToRole="Ve1" />
+          <NavigationProperty Name="ChoNgoi__SuatChieu" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_SuatChieu" FromRole="SuatChieu" ToRole="ChoNgoi__SuatChieu" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -435,30 +424,6 @@
           <NavigationProperty Name="SuatChieu" Relationship="Self.FK_Ve1_SuatChieu" FromRole="Ve1" ToRole="SuatChieu" />
           <NavigationProperty Name="DV_VE" Relationship="QLRapChieuPhim1Model.FK_DV_VE_Ve1" FromRole="Ve1" ToRole="DV_VE" />
         </EntityType>
-        <Association Name="FK_ChoNgoi_SuatChieu_ChoNgoi">
-          <End Role="ChoNgoi" Type="Self.ChoNgoi" Multiplicity="1" />
-          <End Role="ChoNgoi_SuatChieu" Type="Self.ChoNgoi_SuatChieu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ChoNgoi">
-              <PropertyRef Name="IDChoNgoi" />
-            </Principal>
-            <Dependent Role="ChoNgoi_SuatChieu">
-              <PropertyRef Name="IDChoNgoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChoNgoi_SuatChieu_SuatChieu">
-          <End Role="SuatChieu" Type="Self.SuatChieu" Multiplicity="1" />
-          <End Role="ChoNgoi_SuatChieu" Type="Self.ChoNgoi_SuatChieu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SuatChieu">
-              <PropertyRef Name="IDSuatChieu" />
-            </Principal>
-            <Dependent Role="ChoNgoi_SuatChieu">
-              <PropertyRef Name="IDSuatChieu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HoaDon_Ve1">
           <End Role="Ve1" Type="Self.Ve1" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
@@ -521,7 +486,6 @@
         </Association>
         <EntityContainer Name="QLRapChieuPhim1Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChoNgois" EntityType="Self.ChoNgoi" />
-          <EntitySet Name="ChoNgoi_SuatChieu" EntityType="Self.ChoNgoi_SuatChieu" />
           <EntitySet Name="DichVus" EntityType="Self.DichVu" />
           <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
           <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
@@ -530,14 +494,6 @@
           <EntitySet Name="SuatChieux" EntityType="Self.SuatChieu" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Ve1" EntityType="Self.Ve1" />
-          <AssociationSet Name="FK_ChoNgoi_SuatChieu_ChoNgoi" Association="Self.FK_ChoNgoi_SuatChieu_ChoNgoi">
-            <End Role="ChoNgoi" EntitySet="ChoNgois" />
-            <End Role="ChoNgoi_SuatChieu" EntitySet="ChoNgoi_SuatChieu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChoNgoi_SuatChieu_SuatChieu" Association="Self.FK_ChoNgoi_SuatChieu_SuatChieu">
-            <End Role="SuatChieu" EntitySet="SuatChieux" />
-            <End Role="ChoNgoi_SuatChieu" EntitySet="ChoNgoi_SuatChieu" />
-          </AssociationSet>
           <AssociationSet Name="FK_HoaDon_Ve1" Association="Self.FK_HoaDon_Ve1">
             <End Role="Ve1" EntitySet="Ve1" />
             <End Role="HoaDon" EntitySet="HoaDons" />
@@ -597,6 +553,15 @@
             <End Role="Ve1" EntitySet="Ve1" />
             <End Role="DV_VE" EntitySet="DV_VE" />
           </AssociationSet>
+          <EntitySet Name="ChoNgoi__SuatChieu" EntityType="QLRapChieuPhim1Model.ChoNgoi__SuatChieu" />
+          <AssociationSet Name="FK_ChoNgoi__SuatChieu_ChoNgoi" Association="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_ChoNgoi">
+            <End Role="ChoNgoi" EntitySet="ChoNgois" />
+            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChoNgoi__SuatChieu_SuatChieu" Association="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_SuatChieu">
+            <End Role="SuatChieu" EntitySet="SuatChieux" />
+            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -643,6 +608,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ChoNgoi__SuatChieu">
+          <Key>
+            <PropertyRef Name="ChoNgoi_SuatChieu" />
+          </Key>
+          <Property Name="ChoNgoi_SuatChieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="trangthai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDSuatChieu" Type="Int32" />
+          <Property Name="IDChoNgoi" Type="Int32" />
+          <NavigationProperty Name="ChoNgoi" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_ChoNgoi" FromRole="ChoNgoi__SuatChieu" ToRole="ChoNgoi" />
+          <NavigationProperty Name="SuatChieu" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_SuatChieu" FromRole="ChoNgoi__SuatChieu" ToRole="SuatChieu" />
+        </EntityType>
+        <Association Name="FK_ChoNgoi__SuatChieu_ChoNgoi">
+          <End Type="QLRapChieuPhim1Model.ChoNgoi" Role="ChoNgoi" Multiplicity="0..1" />
+          <End Type="QLRapChieuPhim1Model.ChoNgoi__SuatChieu" Role="ChoNgoi__SuatChieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChoNgoi">
+              <PropertyRef Name="IDChoNgoi" />
+            </Principal>
+            <Dependent Role="ChoNgoi__SuatChieu">
+              <PropertyRef Name="IDChoNgoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChoNgoi__SuatChieu_SuatChieu">
+          <End Type="QLRapChieuPhim1Model.SuatChieu" Role="SuatChieu" Multiplicity="0..1" />
+          <End Type="QLRapChieuPhim1Model.ChoNgoi__SuatChieu" Role="ChoNgoi__SuatChieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuatChieu">
+              <PropertyRef Name="IDSuatChieu" />
+            </Principal>
+            <Dependent Role="ChoNgoi__SuatChieu">
+              <PropertyRef Name="IDSuatChieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -654,16 +654,6 @@
               <MappingFragment StoreEntitySet="ChoNgoi">
                 <ScalarProperty Name="IDChoNgoi" ColumnName="IDChoNgoi" />
                 <ScalarProperty Name="TenChoNgoi" ColumnName="TenChoNgoi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChoNgoi_SuatChieu">
-            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.ChoNgoi_SuatChieu">
-              <MappingFragment StoreEntitySet="ChoNgoi_SuatChieu">
-                <ScalarProperty Name="IDChoNgoi_SuatChieu" ColumnName="IDChoNgoi_SuatChieu" />
-                <ScalarProperty Name="Trangthai" ColumnName="Trangthai" />
-                <ScalarProperty Name="IDSuatChieu" ColumnName="IDSuatChieu" />
-                <ScalarProperty Name="IDChoNgoi" ColumnName="IDChoNgoi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -796,6 +786,16 @@
                 <ScalarProperty Name="IDDV_VE" ColumnName="IDDV_VE" />
                 <ScalarProperty Name="IDVe" ColumnName="IDVe" />
                 <ScalarProperty Name="IDDichVu" ColumnName="IDDichVu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChoNgoi__SuatChieu">
+            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.ChoNgoi__SuatChieu">
+              <MappingFragment StoreEntitySet="ChoNgoi__SuatChieu">
+                <ScalarProperty Name="IDChoNgoi" ColumnName="IDChoNgoi" />
+                <ScalarProperty Name="IDSuatChieu" ColumnName="IDSuatChieu" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+                <ScalarProperty Name="ChoNgoi_SuatChieu" ColumnName="ChoNgoi_SuatChieu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.SuatChieu>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+<style>
+    th {
+        color: red
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDSuatChieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSuatChieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayChieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGianChieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDPhongChieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDPhim)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDSuatChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSuatChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPhongChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPhim)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDSuatChieu }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDSuatChieu }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDSuatChieu })
+            </td>
+        </tr>
+    }
+
+</table>

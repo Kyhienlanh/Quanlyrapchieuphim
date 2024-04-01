@@ -12,12 +12,12 @@ namespace Quanlyrapchieuphim.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChoNgoi_SuatChieu
+    public partial class ChoNgoi__SuatChieu
     {
-        public int IDChoNgoi_SuatChieu { get; set; }
-        public string Trangthai { get; set; }
-        public int IDSuatChieu { get; set; }
-        public int IDChoNgoi { get; set; }
+        public int ChoNgoi_SuatChieu { get; set; }
+        public string trangthai { get; set; }
+        public Nullable<int> IDSuatChieu { get; set; }
+        public Nullable<int> IDChoNgoi { get; set; }
     
         public virtual ChoNgoi ChoNgoi { get; set; }
         public virtual SuatChieu SuatChieu { get; set; }

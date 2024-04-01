@@ -17,13 +17,13 @@ namespace Quanlyrapchieuphim.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ChoNgoi()
         {
-            this.ChoNgoi_SuatChieu = new HashSet<ChoNgoi_SuatChieu>();
+            this.ChoNgoi__SuatChieu = new HashSet<ChoNgoi__SuatChieu>();
         }
     
         public int IDChoNgoi { get; set; }
         public string TenChoNgoi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChoNgoi_SuatChieu> ChoNgoi_SuatChieu { get; set; }
+        public virtual ICollection<ChoNgoi__SuatChieu> ChoNgoi__SuatChieu { get; set; }
     }
 }

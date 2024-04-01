@@ -1,0 +1,61 @@
+﻿@model Quanlyrapchieuphim.Models.SuatChieu
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SuatChieu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSuatChieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSuatChieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayChieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayChieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianChieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianChieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phim.TenPhim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phim.TenPhim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhongChieu.TenPhongChieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhongChieu.TenPhongChieu)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

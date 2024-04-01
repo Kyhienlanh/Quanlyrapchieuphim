@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Quanlyrapchieuphim.Models.Phim>
-
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -32,38 +34,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenPhim)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenAnh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TheLoai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThoiLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KhoiChieu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NamSanXuat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DaoDien)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DienVien)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDPhim }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDPhim }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDPhim })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenAnh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhoiChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamSanXuat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaoDien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DienVien)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDPhim }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDPhim }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDPhim })
+            </td>
+        </tr>
+    }
 
 </table>

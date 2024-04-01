@@ -28,7 +28,6 @@ namespace Quanlyrapchieuphim.Models
         }
     
         public virtual DbSet<ChoNgoi> ChoNgois { get; set; }
-        public virtual DbSet<ChoNgoi_SuatChieu> ChoNgoi_SuatChieu { get; set; }
         public virtual DbSet<DichVu> DichVus { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
@@ -38,6 +37,7 @@ namespace Quanlyrapchieuphim.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ve1> Ve1 { get; set; }
         public virtual DbSet<DV_VE> DV_VE { get; set; }
+        public virtual DbSet<ChoNgoi__SuatChieu> ChoNgoi__SuatChieu { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
