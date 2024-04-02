@@ -392,6 +392,9 @@
     <Content Include="assets1\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
     <Content Include="assets1\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
     <Content Include="Areas\Admin\Views\QuanLyPhim\test.cshtml" />
+    <Content Include="Areas\Admin\Views\BaoCaoThongKe\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BaoCaoThongKe\ThongKeTheoNgay.cshtml" />
+    <Content Include="Areas\Admin\Views\BaoCaoThongKe\ThongKeThangNam.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -428,7 +431,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Admin\" />
-    <Folder Include="Areas\Admin\Views\BaoCaoThongKe\" />
     <Folder Include="Areas\Admin\Views\ChiTietPhim\" />
     <Folder Include="Content\css\" />
     <Folder Include="Content\fonts\" />
