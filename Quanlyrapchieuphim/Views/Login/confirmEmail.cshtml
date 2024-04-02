@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>confirmEmail</title>
+</head>
+<body>
+    <div>
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div>@ViewBag.Message</div>
+        }
+        @using (Html.BeginForm("confirmEmail", "Login", FormMethod.Post))
+        {
+            <label class="control-label">Mã xác nhận</label>
+            @Html.TextBox("MaXacNhan", null, new { @class = "form-control" })
+            <button type="submit" class="btn">Xác nhận</button>
+        }
+    </div>
+</body>
+</html>

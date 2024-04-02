@@ -1,17 +1,112 @@
-﻿using System;
+﻿using Quanlyrapchieuphim.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Quanlyrapchieuphim.Helper;
+using static Quanlyrapchieuphim.Helper.sendmail;
 namespace Quanlyrapchieuphim.Controllers
 {
     public class LoginController : Controller
     {
         // GET: Login
+        private QLRapChieuPhim1Entities db = new QLRapChieuPhim1Entities();
         public ActionResult Index()
         {
             return View();
         }
+        public ActionResult test() 
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult login(string Username, string Password)
+        {
+            var user=db.NguoiDungs.FirstOrDefault(u=>u.Email==Username && u.HashPass==Password && u.XacNhanEmail=="true");
+            if (user!=null)
+            {
+                Session["TaiKhoan"]=user.UserName;
+                return RedirectToAction("test");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+
+            }
+        }
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(FormCollection form)
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(100000, 999999);
+            string Username = form["Username"];
+            string MatKhau = form["MatKhau"];
+            string NhapLaiMatKhau = form["NhapLaiMatKhau"];
+            string sdt = form["sdt"];
+            string Email = form["email"];
+            NguoiDung nguoiDung = new NguoiDung
+            {
+                TenNguoiDung = Username,
+                SoDienThoai = sdt,
+                Email = Email,
+                UserName = Username,
+                HashPass = MatKhau,
+                MaXacNhan = randomNumber.ToString(),
+            };
+            db.NguoiDungs.Add(nguoiDung);
+            db.SaveChanges();
+
+           
+            Session["IDNguoiDung"] = nguoiDung.IDNguoiDung;
+
+            SendMail.SendMail123(Email, "Mã xác nhận ", randomNumber.ToString(), null);
+
+            Session["MaXacNhan"] = randomNumber.ToString();
+            return RedirectToAction("confirmEmail");
+        }
+
+        [HttpGet]
+        public ActionResult confirmEmail()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult confirmEmail(FormCollection form)
+        {
+            string MaXacNhan = form["MaXacNhan"];
+            string data = Session["MaXacNhan"] as string;
+
+           
+            if (Session["IDNguoiDung"] is int id)
+            {
+                var a = db.NguoiDungs.FirstOrDefault(u => u.IDNguoiDung == id);
+                if (MaXacNhan == data)
+                {
+                    a.XacNhanEmail = "true";
+                    db.SaveChanges();
+                    return RedirectToAction("test");
+                }
+                else
+                {
+                 
+                    ViewBag.Message = "Mã xác nhận không đúng. Vui lòng kiểm tra lại.";
+                    return View();
+                }
+            }
+            else
+            {
+                // Handle the case where IDNguoiDung is not set or cannot be parsed to an integer
+                ViewBag.Message = "Lỗi xác nhận ID người dùng.";
+                return View();
+            }
+        }
+
+
     }
 }
