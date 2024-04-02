@@ -24,7 +24,7 @@
         <!-- partial:../../partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="../../index.html"><img src="~/assets1/images/logo.svg" alt="logo" /></a>
+                <a class="navbar-brand brand-logo" href="@Url.Action("index", "QuanLyPhim")"><img src="~/assets1/images/logo.svg" alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="~/assets1/images/logo-mini.svg" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -196,6 +196,7 @@
                                     <a class="nav-link" href="@Url.Action("index", "QuanLyLichChieuPhim")">QUẢN LÝ SUẤT CHIẾU</a>
 
                                     <a class="nav-link" href="@Url.Action("index", "QuanLyTaiKhoan")">QUẢN LÝ TÀI KHOẢN</a>
+                                    <a class="nav-link" href="@Url.Action("index", "BaoCaoThongKe")">Báo cáo thống kê</a>
                                 </li>
                                 <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a></li>
                             </ul>
