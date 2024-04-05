@@ -2,10 +2,20 @@
 @{
     Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
 }
+<style>
+    th {
+        color: red;
+    }
+
+    tr.separator {
+        border-bottom: 1px solid pink; /* Change border color to green */
+    }
+</style>
+
 @using (Html.BeginForm("Index", "BaoCaoThongKe", FormMethod.Post))
 {
     <p>
-        date <input type="date" name="startDate" />
+        Theo Ngày <input type="date" name="startDate" />
 
         <input type="submit" value="Filter" />
     </p>
@@ -13,11 +23,12 @@
 @using (Html.BeginForm("ThongKeThangNam", "BaoCaoThongKe", FormMethod.Post))
 {
     <p>
-        Start Date: <input type="date" name="startDate" />
-        End Date: <input type="date" name="endDate" />
+        Ngày bắt đầu: <input type="date" name="startDate" />
+        Ngày kết thúc: <input type="date" name="endDate" />
         <input type="submit" value="Filter" />
     </p>
 }
+
 
 <table class="table">
     <tr>
@@ -41,7 +52,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="separator">
             <td>
                 @Html.DisplayFor(modelItem => item.TenHoaDon)
             </td>
@@ -57,8 +68,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ve1.TenVe)
             </td>
+
         </tr>
+
     }
 
+
 </table>
-<h3>Tổng tiền : @ViewBag.TongTien</h3>
+<h4>Tổng tiền : @ViewBag.TongTien vnd</h4>

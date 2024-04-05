@@ -46,11 +46,43 @@
         <div>
             <h3 class="tongcong">Tổng cộng : @ViewBag.message VNĐ</h3>
         </div>
-        <a href="/Home/PaymentWithPayPal">Thanh toán bằng paypal</a>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <a class="thanhtoan" href="/Home/PaymentWithPayPal">
+            <i class="fab fa-paypal"></i>PayPal
+        </a>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+       
     </div>
 </body>
 </html>
 <style>
+    .back-button {
+        background-color: #4CAF50; /* Màu nền */
+        color: white; /* Màu chữ */
+        padding: 10px 20px; /* Kích thước nút */
+        border: none; /* Không có đường viền */
+        border-radius: 5px; /* Bo tròn góc */
+        cursor: pointer; /* Con trỏ chuột khi di chuyển qua nút */
+        text-decoration: none; /* Không gạch chân */
+        font-size: 16px; /* Cỡ chữ */
+        margin-left: 150px;
+    }
+
+        .back-button:hover {
+            background-color: #45a049; /* Màu nền khi di chuột qua */
+        }
+
+    .thanhtoan {
+        background-color: blue; /* Màu nền */
+        color: white; /* Màu chữ */
+        padding: 10px 20px; /* Kích thước nút */
+        border: none; /* Không có đường viền */
+        border-radius: 5px; /* Bo tròn góc */
+        cursor: pointer; /* Con trỏ chuột khi di chuyển qua nút */
+        text-decoration: none; /* Không gạch chân */
+        margin-left: 18px;
+    }
+
     p {
         font-weight: bold;
     }

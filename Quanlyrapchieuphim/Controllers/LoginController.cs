@@ -53,7 +53,11 @@ namespace Quanlyrapchieuphim.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+        public ActionResult delete()
+        {
+            Session["TaiKhoan"] = null;
+            return RedirectToAction("index","Home");
+        }
         [HttpGet]
         public ActionResult Register()
         {
@@ -87,7 +91,7 @@ namespace Quanlyrapchieuphim.Controllers
             SendMail.SendMail123(Email, "Mã xác nhận ", randomNumber.ToString(), null);
 
             Session["MaXacNhan"] = randomNumber.ToString();
-            return RedirectToAction("confirmEmail");
+            return View();
         }
 
         [HttpGet]
@@ -100,8 +104,7 @@ namespace Quanlyrapchieuphim.Controllers
         {
             string MaXacNhan = form["MaXacNhan"];
             string data = Session["MaXacNhan"] as string;
-
-           
+          
             if (Session["IDNguoiDung"] is int id)
             {
                 var a = db.NguoiDungs.FirstOrDefault(u => u.IDNguoiDung == id);
@@ -109,7 +112,8 @@ namespace Quanlyrapchieuphim.Controllers
                 {
                     a.XacNhanEmail = "true";
                     db.SaveChanges();
-                    return RedirectToAction("test");
+
+                    return RedirectToAction("index","home");
                 }
                 else
                 {
