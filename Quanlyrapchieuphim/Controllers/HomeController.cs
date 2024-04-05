@@ -1,4 +1,5 @@
 ﻿using PayPal.Api;
+using Quanlyrapchieuphim.Helper;
 using Quanlyrapchieuphim.Models;
 using System;
 using System.Collections.Generic;
@@ -6,8 +7,10 @@ using System.Data;
 using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Services.Description;
+using static Quanlyrapchieuphim.Helper.sendmail;
 
 namespace Quanlyrapchieuphim.Controllers
 {
@@ -183,6 +186,7 @@ namespace Quanlyrapchieuphim.Controllers
 
             return View();
         }
+
         public ActionResult FailureView()
         {
             return View();
@@ -248,8 +252,16 @@ namespace Quanlyrapchieuphim.Controllers
             {
                 return View("FailureView");
             }
+
             //on successful payment, show success page to user.  
-            int idChoNgoi;
+          
+
+
+              
+               
+
+          
+            int idChoNgoi = 0;
             if (Session["ChoNgoi"] != null && int.TryParse(Session["ChoNgoi"].ToString(), out idChoNgoi))
             {
                 // Retrieve the ticket with the IDChoNgoi_SuatChieu matching the ChoNgoi session value
@@ -257,13 +269,43 @@ namespace Quanlyrapchieuphim.Controllers
                 var ChoNgoi_SuatChieu= db.ChoNgoi__SuatChieu.FirstOrDefault(s => s.ChoNgoi_SuatChieu == idChoNgoi);
                 if (ve != null)
                 {
+
                     // Update the ticket status to "Da Thanh Toan" (Paid)
                     ve.TrangThai = "Da Thanh Toan";
                     ChoNgoi_SuatChieu.trangthai= "Da Duoc Dat";
+                    HoaDon hoaDon = new HoaDon();
+                    hoaDon.IDVe = ve.IDVe;
+                    hoaDon.TenHoaDon = "Ve xem phim";
+                    if (Session["TongTien"] != null && float.TryParse(Session["TongTien"].ToString(), out float tongTien))
+                    {
+                        hoaDon.TongTien = tongTien;
+                    }
+                    else
+                    {
+                        hoaDon.TongTien = 0;
+                    }
+                    DateTime ngayHienTai = DateTime.Now;
+                    hoaDon.NgayTao = ngayHienTai;
+                    db.HoaDons.Add(hoaDon);
                     db.SaveChanges(); // Save changes to the database
+                                      // Format thông tin hóa đơn thành một chuỗi văn bản
+                    string hoaDonInfo = $"Tên hóa đơn: {hoaDon.TenHoaDon}\n" +
+                                        $"ID Vé: {hoaDon.IDVe}\n" +
+                                        $"Tổng tiền: {hoaDon.TongTien}\n" +
+                                        $"Ngày tạo: {hoaDon.NgayTao}";
+
+                    // Gửi email chứa thông tin hóa đơn
+                    string recipientEmail = Session["TaiKhoan"] as string;
+                    // Thay thế bằng địa chỉ email của người nhận
+                    string subject = "Thông tin hóa đơn";
+                    string body = hoaDonInfo;
+                    string attachFile = null; // Nếu bạn muốn đính kèm file, hãy cung cấp đường dẫn đến file ở đây
+
+                    // Gọi phương thức SendMail.SendMail123 để gửi email
+                    bool emailSent = SendMail.SendMail123(recipientEmail, subject, body, attachFile);
 
                     // Redirect the user to the Index action of the Login controller
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("SuccessView");
                 }
                 else
                 {

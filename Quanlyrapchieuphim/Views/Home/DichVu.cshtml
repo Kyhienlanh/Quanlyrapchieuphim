@@ -2,109 +2,569 @@
     ViewBag.Title = "DichVu";
 }
 
-<h2>DỊCH VỤ</h2>
 
 @model IEnumerable<Quanlyrapchieuphim.Models.DichVu>
 @{
     Layout = null;
 }
-
-@using (Html.BeginForm("DichVu", "Home", FormMethod.Post))
-{
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenDichVu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GiaTien)
-            </th>
-            <th>
-                Chọn
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenDichVu)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GiaTien)
-                </td>
-                <td>
-                    <input type="checkbox" name="selectedServices" value="@item.IDDichVu" />
-
-                </td>
-            </tr>
-        }
-
-    </table>
-    <button type="submit" class="btn-submit">Xác nhận</button>
-}
-
 <style>
-    .btn-submit {
-        margin: 10px auto;
-        padding: 10px 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        text-align: center;
+    /* CSS styles go here */
+    .seat-map {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .custom-radio {
+        position: relative;
+        width: 40px; /* Chiều rộng của ghế */
+        height: 40px; /* Chiều cao của ghế */
+        margin: 5px; /* Khoảng cách giữa các ghế */
+        border-radius: 50%; /* Hình dạng của ghế (hình tròn) */
+        background-color: #ccc; /* Màu sắc của ghế */
         cursor: pointer;
         display: flex;
-        justify-content: center;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu sắc */
+        margin-top: 30px;
     }
 
-        .btn-submit:hover {
-            background-color: #0069d9;
+        .custom-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
         }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        max-width: 800px; /* Điều chỉnh kích thước của khung */
-        margin: 0 auto; /* Để căn giữa khung */
-        border: 1px solid #ddd; /* Định dạng khung */
-        border-radius: 5px; /* Định dạng khung */
-        overflow-x: auto; /* Cho phép cuộn ngang nếu bảng quá rộng */
+            .custom-radio input:checked + .checkmark {
+                display: block;
+            }
+
+    .checkmark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 10px; /* Chiều cao của dấu check */
+        width: 10px; /* Chiều rộng của dấu check */
+        background-color: #2196F3; /* Màu sắc của dấu check */
+        border-radius: 50%; /* Hình dạng của dấu check (hình tròn) */
+        display: none; /* Ẩn dấu check ban đầu */
     }
 
-    .table th, .table td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .table th {
-        background-color: cornflowerblue;
+    .btn-chose {
+        background-color: darkorange;
         color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+        display: inline-block; /* Thay đổi từ block thành inline-block */
+        margin-left: 1100px; /* Điều chỉnh khoảng cách so với các vị trí chỗ ngồi */
+        margin-top: -90px; /* Thay đổi margin-top để căn giữa theo chiều dọc */
     }
 
-    .table tr:nth-child(even) {
-        background-color: #f2f2f2;
+
+        .btn-chose:hover {
+            background-color: #0d5cb6;
+        }
+
+    .custom-radio p {
+        margin: 0;
+        font-size: 12px;
+        color: #999;
     }
 
-    .table tr:hover {
-        background-color: #ddd;
+    .site-header {
+        background-color: #333; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        font-family: Tahoma, sans-serif; /* Font chữ */
     }
 
-    h2 {
+    .container {
+        width: 90%; /* Độ rộng của container */
+        margin: 0 auto; /* Căn giữa container */
+    }
+
+    .site-navigation {
+        padding: 10px 0; /* Khoảng cách đệm */
+    }
+
+    .menu {
+        list-style: none; /* Ẩn chấm tròn danh sách */
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center; /* Căn giữa theo chiều dọc */
-        height: 5vh;
+    }
+
+    .custom-button1 {
+        padding: 10px 20px; /* Khoảng cách đệm bên trong nút */
+        font-size: 16px; /* Kích thước chữ */
+        font-weight: bold; /* Đậm */
+        text-transform: uppercase; /* Chuyển đổi chữ thành chữ in hoa */
+        color: blue; /* Màu chữ */
+        background-color: #007bff; /* Màu nền */
+        border: none; /* Xóa viền */
+        border-radius: 5px; /* Bo tròn các góc */
+        cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua */
+        transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng hover */
+    }
+
+        .custom-button1:hover {
+            background-color: #0056b3; /* Màu nền khi di chuột qua */
+        }
+
+        .custom-button1:active {
+            transform: translateY(2px); /* Hiệu ứng khi click */
+        }
+
+
+    .menu li {
+        display: inline-block; /* Hiển thị các mục menu trên cùng một dòng */
+    }
+
+        .menu li a {
+            display: block; /* Biến các liên kết thành các hộp có thể nhấp */
+            padding: 10px 20px; /* Khoảng cách đệm */
+            text-decoration: none; /* Loại bỏ gạch chân */
+            color: ghostwhite; /* Màu chữ */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+        }
+
+            .menu li a:hover {
+                background-color: #555; /* Màu nền khi di chuột qua */
+            }
+
+    /* Kích thước và khoảng cách giữa các mục menu */
+    .login-container {
+        margin-left: 900px; /* Đẩy phần đăng nhập sang bên phải */
+        margin-top: -60px;
+    }
+
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
         font-weight: bold;
-        color: white;
-        background-color: black; /* Đặt màu nền */
-        max-width: 800px; /* Điều chỉnh kích thước */
-        margin: 0 auto; /* Để căn giữa */
-        border: 1px solid #ddd; /* Định dạng khung */
-        border-radius: 5px; /* Định dạng khung */
-        overflow-x: auto; /* Cho phép cuộn ngang nếu tiêu đề quá rộng */
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-button:active {
+            transform: translateY(2px);
+        }
+
+
+
+
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 200px; /* Điều chỉnh chiều cao của banner */
+        background-color: #f0f0f0;
+        overflow: hidden; /* Ẩn phần nội dung vượt ra ngoài */
+    }
+
+    .banner-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #333;
+    }
+
+
+    .carousel-item img {
+        object-fit: cover; /* Giữ nguyên vẹn hình ảnh không làm mờ */
+        max-height: 500px; /* Điều chỉnh chiều cao tối đa của hình ảnh */
+        width: auto; /* Tự động tính toán chiều rộng dựa trên chiều cao */
+        margin: auto; /* Căn giữa hình ảnh */
+    }
+
+    /* Thiết lập kiểu cho phần chọn phim, chọn ngày và chọn xuất chiếu */
+    .container select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        color: #555;
+        font-size: 16px;
+    }
+
+    /* Thiết lập kiểu cho nút mua vé */
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: sandybrown;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-button:active {
+            transform: translateY(2px);
+        }
+
+    .row {
+        margin-bottom: -20px;
+    }
+
+    .option-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .small-option {
+        flex: 1;
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ccc; /* Thêm viền cho từng option nếu cần */
+        border-radius: 5px; /* Bo tròn các góc của option nếu cần */
+    }
+
+    .custom-button {
+        padding: 12px 30px; /* Điều chỉnh kích thước của nút */
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 0px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-bottom: 15px;
+    }
+
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-button:active {
+            transform: translateY(2px);
+        }
+
+    .separator-line {
+        width: 70%; /* Độ rộng của đường thẳng */
+        margin: 20px auto; /* Khoảng cách từ đường thẳng đến các vị trí chỗ ngồi */
+        border: none; /* Loại bỏ viền */
+        height: 2px; /* Chiều cao của đường thẳng */
+        background-color: orange; /* Màu sắc của đường thẳng */
+    }
+
+    .centered-h5 {
+        text-align: center; /* Căn giữa văn bản */
+        color: darkorange; /* Màu chữ */
+        position: absolute; /* Đặt phần tử tương đối với phần tử cha */
+        top: 50%; /* Đưa phần tử lên trên 50% của phần tử cha */
+        left: 50%; /* Đưa phần tử sang phải 50% của phần tử cha */
+        transform: translate(-50%, -50%); /* Dịch chuyển phần tử đi 50% theo chiều ngang và dọc */
+        margin-top: 543px;
+    }
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 5px 0;
+    }
+
+    .container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-md-4 {
+        width: calc(100% / 3);
+        padding: 0 15px;
+    }
+
+    h3 {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .social-icons {
+        margin-bottom: 20px;
+    }
+
+        .social-icons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+            .social-icons li:last-child {
+                margin-right: 0;
+            }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+    .footer-menu li {
+        margin-bottom: 3px;
+    }
+
+    .footer-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .footer-menu a:hover {
+            text-decoration: underline;
+        }
+
+    .copyright {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
     }
 </style>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Thư viện JavaScript jQuery và Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<header class="site-header">
+    <div class="container">
+        <nav class="site-navigation">
+            <div class="menu">
+                <ul>
+                    <li><a href="#booking">Đặt vé</a></li>
+                    <li><a href="#movies">Phim</a></li>
+                    <li><a href="#search">Tìm kiếm</a></li>
+                    <li><a href="#cinema-corner">Góc điện ảnh</a></li>
+                </ul>
+            </div>
+            <div class="login-container">
+
+                @if (Session["TaiKhoan"] == null)
+                {
+                    <button> <a href="@Url.Action("Index", "Login")">Đăng nhập</a></button>
+                }
+                else
+                {
+                    <button><a href="@Url.Action("delete", "Login")">Đăng xuất</a></button>
+                }
+
+
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+<body>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Images/god-x-kong-2048_1711942313253.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Images/mobile-suit-gundam-seed-freedom-3_1712027621954.jpg" class="d-block w-100" alt="...">
+
+            </div>
+            <div class="carousel-item">
+                <img src="~/Images/18x2-2048_1712028163819.jpg" class="d-block w-100" alt="...">
+            </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+
+    @using (Html.BeginForm("DichVu", "Home", FormMethod.Post))
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenDichVu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GiaTien)
+                </th>
+                <th>
+                    Chọn
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenDichVu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GiaTien)
+                    </td>
+                    <td>
+                        <input type="checkbox" name="selectedServices" value="@item.IDDichVu" />
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <button type="submit" class="btn-submit">Xác nhận</button>
+    }
+
+    <style>
+        .btn-submit {
+            margin: 10px auto;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+        }
+
+            .btn-submit:hover {
+                background-color: #0069d9;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            max-width: 800px; /* Điều chỉnh kích thước của khung */
+            margin: 0 auto; /* Để căn giữa khung */
+            border: 1px solid #ddd; /* Định dạng khung */
+            border-radius: 5px; /* Định dạng khung */
+            overflow-x: auto; /* Cho phép cuộn ngang nếu bảng quá rộng */
+        }
+
+        .table th, .table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: cornflowerblue;
+            color: white;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        h2 {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Căn giữa theo chiều dọc */
+            height: 5vh;
+            font-weight: bold;
+            color: white;
+            background-color: black; /* Đặt màu nền */
+            max-width: 800px; /* Điều chỉnh kích thước */
+            margin: 0 auto; /* Để căn giữa */
+            border: 1px solid #ddd; /* Định dạng khung */
+            border-radius: 5px; /* Định dạng khung */
+            overflow-x: auto; /* Cho phép cuộn ngang nếu tiêu đề quá rộng */
+        }
+    </style>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Giới thiệu</h3>
+                    <p>Đặt vé xem phim mọi lúc mọi nơi với website của chúng tôi. Hỗ trợ khách hàng tận tình, cam kết giá tốt nhất, trải nghiệm website thân thiện và cập nhật thông tin liên tục. Tham gia cộng đồng yêu phim của chúng tôi để chia sẻ niềm đam mê điện ảnh và nhận được nhiều ưu đãi hấp dẫn.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Liên hệ</h3>
+                    <p>
+                        Địa chỉ: Thủ Dầu Một, Bình Dương<br>
+                        Email: kyhienlanh@gmail.com<br>
+                        Điện thoại: 0943575868
+                    </p>
+                </div>
+
+                <div class="col-md-4">
+                    <h3>Mạng xã hội</h3>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+                    <h3>Menu website</h3>
+                    <ul class="footer-menu">
+                        <li><a href="/Home/Index">Trang chủ</a></li>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 - Bản quyền thuộc về HKL CINEMA
+            </div>
+        </div>
+    </footer>
+</body>
