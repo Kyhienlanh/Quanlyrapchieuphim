@@ -7,7 +7,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>NguoiDung</h4>
+        <h2>QUẢN LÝ TÀI KHOẢN</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -100,12 +100,36 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-creat" />
             </div>
         </div>
     </div>
 }
 
-<div>
+<div class="back-to-list-link">
     @Html.ActionLink("Back to List", "Index")
 </div>
+<style>
+    h2 {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        height: 4.5vh;
+        font-weight: bold; /* Màu nền gần đen */
+        color: black;
+    }
+
+    .back-to-list-link a {
+        background-color: yellow; /* Màu nền */
+        color: orangered; /* Màu chữ */
+        padding: 8px 16px; /* Padding cho liên kết */
+        border-radius: 4px; /* Làm tròn góc */
+        text-decoration: none;
+    }
+
+    .btn-creat {
+        background-color: blue;
+        color: white;
+    }
+</style>

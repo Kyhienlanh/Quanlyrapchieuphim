@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "ChiTietPhim";
+    Layout = "";
+}
+
+<header class="site-header">
+
+    <div class="container">
+        <nav class="site-navigation">
+            <div class="menu">
+                <ul>
+                    <li><a href="#booking">Đặt vé</a></li>
+                    <li><a href="#movies">Phim</a></li>
+                    <li><a href="#search">Tìm kiếm</a></li>
+                    <li><a href="#cinema-corner">Góc điện ảnh</a></li>
+                </ul>
+            </div>
+            <div class="login-container">
+                <button class="custom-button1">Đăng nhập</button>
+
+            </div>
+        </nav>
+    </div>
+</header>
+<style>
+    .site-header {
+        background-color: #333; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        font-family: Tahoma, sans-serif; /* Font chữ */
+    }
+
+    .container {
+        width: 90%; /* Độ rộng của container */
+        margin: 0 auto; /* Căn giữa container */
+    }
+
+    .site-navigation {
+        padding: 10px 0; /* Khoảng cách đệm */
+    }
+
+    .menu {
+        list-style: none; /* Ẩn chấm tròn danh sách */
+        margin: 0;
+        padding: 0;
+    }
+
+    .custom-button1 {
+        padding: 10px 20px; /* Khoảng cách đệm bên trong nút */
+        font-size: 16px; /* Kích thước chữ */
+        font-weight: bold; /* Đậm */
+        text-transform: uppercase; /* Chuyển đổi chữ thành chữ in hoa */
+        color: #fff; /* Màu chữ */
+        background-color: #007bff; /* Màu nền */
+        border: none; /* Xóa viền */
+        border-radius: 5px; /* Bo tròn các góc */
+        cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua */
+        transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng hover */
+    }
+
+        .custom-button1:hover {
+            background-color: #0056b3; /* Màu nền khi di chuột qua */
+        }
+
+        .custom-button1:active {
+            transform: translateY(2px); /* Hiệu ứng khi click */
+        }
+
+
+    .menu li {
+        display: inline-block; /* Hiển thị các mục menu trên cùng một dòng */
+    }
+
+        .menu li a {
+            display: block; /* Biến các liên kết thành các hộp có thể nhấp */
+            padding: 10px 20px; /* Khoảng cách đệm */
+            text-decoration: none; /* Loại bỏ gạch chân */
+            color: ghostwhite; /* Màu chữ */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+        }
+
+            .menu li a:hover {
+                background-color: #555; /* Màu nền khi di chuột qua */
+            }
+
+    /* Kích thước và khoảng cách giữa các mục menu */
+    .login-container {
+        margin-left: 900px; /* Đẩy phần đăng nhập sang bên phải */
+        margin-top: -60px;
+    }
+
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-button:active {
+            transform: translateY(2px);
+        }
+    /* CSS đã được định nghĩa ở trên */
+    .phim-container img {
+        width: 400px; /* Tăng kích thước của hình ảnh lên 300px */
+        height: auto; /* Đảm bảo tỉ lệ khung hình được giữ nguyên */
+        margin-right: 20px; /* Khoảng cách phải giữa hình ảnh và nội dung */
+        border-radius: 10px; /* Bo tròn các góc của hình ảnh */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Định dạng shadow cho hình ảnh */
+        cursor: pointer; /* Biến con trỏ thành dấu tay khi hover để chỉ ra rằng hình ảnh có thể được nhấp */
+        margin-left: 200px;
+        margin-top: 50px;
+    }
+
+        /* Hiệu ứng khi rê chuột vào hình ảnh */
+        .phim-container img:hover {
+            transform: scale(1.05); /* Phóng to hình ảnh khi rê chuột vào */
+            transition: transform 0.3s ease; /* Hiệu ứng mượt mà */
+        }
+
+    /* Hiệu ứng khi hiển thị chi tiết phim */
+    .phim-details {
+        flex-grow: 1; /* Đảm bảo phần nội dung mở rộng để chiếm hết không gian còn lại */
+        display: inline-block;
+    }
+
+        .phim-details h2 {
+            font-family: Impact, fantasy;
+            font-size: 70px;
+            margin-bottom: 30px;
+            color: darkorange;
+        }
+
+        .phim-details p {
+            font-size: 25px;
+        }
+
+        .phim-details p {
+            border: none; /* Thiết lập border cho mỗi thẻ p */
+            padding: 10px; /* Khoảng cách giữa border và nội dung bên trong */
+            margin: 5px 0; /* Khoảng cách giữa các thẻ p */
+            font-weight: bold; /* In đậm các thông tin */
+            color: darkgray;
+        }
+
+    .lich-chieu {
+        font-size: 36px; /* Thiết lập kích thước chữ cho tiêu đề "Lịch Chiếu" */
+        color: black; /* Thiết lập màu chữ */
+        margin-top: -100px;
+        margin-bottom: 10px; /* Khoảng cách dưới cùng của tiêu đề */
+        text-align: center;
+    }
+
+
+    /* CSS đã được định nghĩa ở trên */
+
+    /* Định dạng cho tiêu đề lịch chiếu */
+
+
+</style>
+<body>
+
+    @foreach (var item in Model)
+    {
+        <div class="phim-container">
+
+            <img src="~/Images/@item.TenAnh" alt="Hình ảnh" onclick="showDetails(this)" data-phimid="@item.IDPhim" />
+            <div class="phim-details">
+                <h2>@item.TenPhim</h2>
+                <p><span style="font-weight:bold; color: gray">Thể loại: </span> @item.TheLoai</p>
+                <p><span style="font-weight:bold; color: gray">Thời lượng:</span> @item.ThoiLuong phút</p>
+                <p><span style="font-weight:bold; color: gray">Diễn viên:</span> @item.DienVien</p>
+                <p><span style="font-weight: bold; color: gray">Đạo diễn:</span> @item.DaoDien</p>
+                <!-- Thêm các thông tin khác về phim ở đây -->
+            </div>
+        </div>
+    }
+    <h1 class="lich-chieu">Lịch Chiếu</h1>
+    @Html.Action("LichChieu", "Home")
+
+</body>

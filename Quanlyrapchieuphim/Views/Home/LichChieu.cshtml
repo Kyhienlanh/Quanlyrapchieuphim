@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.SuatChieu>
+@{
+    Layout = null;
+}
+<style>
+    .lich-chieu {
+        margin-top: 20px; /* Khoảng cách từ phần chi tiết phim đến lịch chiếu */
+    }
+
+        /* Định dạng cho bảng lịch chiếu */
+        .lich-chieu table {
+            width: 100%; /* Chiều rộng của bảng lịch chiếu */
+            border-collapse: collapse; /* Xóa đường viền giữa các ô */
+            background-color: #f9f9f9; /* Màu nền của bảng */
+        }
+
+        /* Định dạng cho ô tiêu đề của bảng lịch chiếu */
+        .lich-chieu th {
+            padding: 15px; /* Padding cho các ô */
+            border: 1px solid #ddd; /* Định dạng đường viền của các ô */
+            background-color: #f2f2f2; /* Màu nền của các ô tiêu đề */
+        }
+
+        /* Định dạng cho các ô dữ liệu của bảng lịch chiếu */
+        .lich-chieu td {
+            padding: 10px; /* Padding cho các ô */
+            border: 1px solid #ddd; /* Định dạng đường viền của các ô */
+            text-align: center; /* Căn chỉnh văn bản vào giữa của ô */
+        }
+
+            /* Loại bỏ đường viền bên trái của cột đầu tiên */
+            .lich-chieu th:first-child,
+            .lich-chieu td:first-child {
+                border-left: none;
+            }
+
+            /* Loại bỏ đường viền bên phải của cột cuối cùng */
+            .lich-chieu th:last-child,
+            .lich-chieu td:last-child {
+                border-right: none;
+            }
+</style>
+
+<div class="lich-chieu">
+    <table>
+        <thead>
+            <tr>
+                <th>Ngày chiếu</th>
+                <th>Giờ chiếu</th>
+                <th>Đặt vé</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NgayChieu</td>
+                    <td>@item.ThoiGianChieu</td>
+                    <td><a href="@Url.Action("ChoNgoi","Home", new {  id = item.IDSuatChieu })" class="btn btn-danger" role="button">Đặt vé</a></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

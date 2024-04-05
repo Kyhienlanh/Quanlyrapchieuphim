@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "DichVu";
+}
+
+<h2>DỊCH VỤ</h2>
+
+@model IEnumerable<Quanlyrapchieuphim.Models.DichVu>
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("DichVu", "Home", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDichVu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaTien)
+            </th>
+            <th>
+                Chọn
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDichVu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTien)
+                </td>
+                <td>
+                    <input type="checkbox" name="selectedServices" value="@item.IDDichVu" />
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    <button type="submit" class="btn-submit">Xác nhận</button>
+}
+
+<style>
+    .btn-submit {
+        margin: 10px auto;
+        padding: 10px 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+    }
+
+        .btn-submit:hover {
+            background-color: #0069d9;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        max-width: 800px; /* Điều chỉnh kích thước của khung */
+        margin: 0 auto; /* Để căn giữa khung */
+        border: 1px solid #ddd; /* Định dạng khung */
+        border-radius: 5px; /* Định dạng khung */
+        overflow-x: auto; /* Cho phép cuộn ngang nếu bảng quá rộng */
+    }
+
+    .table th, .table td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: cornflowerblue;
+        color: white;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+        background-color: #ddd;
+    }
+
+    h2 {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Căn giữa theo chiều dọc */
+        height: 5vh;
+        font-weight: bold;
+        color: white;
+        background-color: black; /* Đặt màu nền */
+        max-width: 800px; /* Điều chỉnh kích thước */
+        margin: 0 auto; /* Để căn giữa */
+        border: 1px solid #ddd; /* Định dạng khung */
+        border-radius: 5px; /* Định dạng khung */
+        overflow-x: auto; /* Cho phép cuộn ngang nếu tiêu đề quá rộng */
+    }
+</style>

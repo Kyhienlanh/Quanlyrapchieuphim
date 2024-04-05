@@ -21,20 +21,39 @@ namespace Quanlyrapchieuphim.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult login(string Username, string Password)
+        public ActionResult Login(string Username, string Password)
         {
-            var user=db.NguoiDungs.FirstOrDefault(u=>u.Email==Username && u.HashPass==Password && u.XacNhanEmail=="true");
-            if (user!=null)
+
+            var user = db.NguoiDungs.FirstOrDefault(u => u.Email == Username && u.HashPass == Password && u.XacNhanEmail == "true");
+
+            if (user != null)
             {
-                Session["TaiKhoan"]=user.UserName;
-                return RedirectToAction("test");
+                if (user.Quyen =="1")
+                {
+                    Session["TaiKhoan"] = user.Email;
+                    return RedirectToAction("index", "QuanLyPhim", new { area = "Admin" });
+
+                }
+                else
+                {
+                    Session["TaiKhoan"] = user.Email;
+                    string a = Session["ReturnUrl"]as string;
+                    if (a == null)
+                    {
+                        return RedirectToAction("index", "Home");
+                    }
+                    return Redirect(a);
+                }
+
+                
             }
             else
             {
+           
                 return RedirectToAction("Index");
-
             }
         }
+
         [HttpGet]
         public ActionResult Register()
         {

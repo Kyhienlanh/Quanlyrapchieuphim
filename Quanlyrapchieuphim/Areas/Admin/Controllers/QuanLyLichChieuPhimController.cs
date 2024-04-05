@@ -19,25 +19,14 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var dataPhim = (from s in db.Phims
-                            select new SelectListItem
-                            {
-                                Value = s.IDPhim.ToString(),
-                                Text = s.TenPhim
-                            }).ToList();
-
-            var dataPhongChieu = (from s in db.PhongChieux
-                                  select new SelectListItem
-                                  {
-                                      Value = s.IDPhongChieu.ToString(),
-                                      Text = s.TenPhongChieu
-                                  }).ToList();
-
-            ViewData["IDPhim"] = dataPhim;
-            ViewData["IDPhongChieu"] = dataPhongChieu;
-
+            ViewBag.IDPhongChieu = new SelectList(db.PhongChieux, "IDPhongChieu", "TenPhongChieu");
+            ViewBag.IDPhim = new SelectList(db.Phims, "IDPhim", "TenPhim");
+          
             return View();
         }
+
+
+
         [HttpPost]
         public ActionResult Create(SuatChieu suatChieu)
         {
@@ -45,19 +34,22 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
             {
 
                 db.SuatChieux.Add(suatChieu);
-                for(int i = 1; i <= 50; i++)
+              
+                for (int i = 1; i <= 50; i++)
                 {
                     ChoNgoi__SuatChieu a = new ChoNgoi__SuatChieu();
-                    Ve1 ve = new Ve1();
+                  
                     a.IDSuatChieu = suatChieu.IDSuatChieu;
                     a.IDChoNgoi = i;
                     db.ChoNgoi__SuatChieu.Add(a);
                     db.SaveChanges();
+
+                    Ve1 ve = new Ve1();
                     ve.IDChoNgoi_SuatChieu = a.ChoNgoi_SuatChieu;
                     ve.GiaVe = 70000;
                     ve.TenVe = suatChieu.TenSuatChieu;
                     db.Ve1.Add(ve);
-                    db.SaveChanges();
+                 
                 }
                 db.SaveChanges();
 
@@ -66,6 +58,7 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
             return View(suatChieu);
 
         }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -79,21 +72,20 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
             }
 
             // Populate the ViewData with options for the "IDPhongChieu" dropdown list
-            ViewData["IDPhongChieuOptions"] = (from s in db.SuatChieux
+            ViewData["IDPhongChieuOptions"] = (from s in db.PhongChieux
                                                select new SelectListItem
                                                {
                                                    Value = s.IDPhongChieu.ToString(),
-                                                   Text = s.IDPhongChieu.ToString()
+                                                   Text = s.TenPhongChieu.ToString()
                                                }).ToList();
 
             // Populate the ViewData with options for the "IDPhim" dropdown list
-            ViewData["IDPhim"] = (from s in db.Phims
-                                  select new SelectListItem
-                                  {
-                                      Value = s.IDPhim.ToString(),
-                                      Text = s.IDPhim.ToString()
-                                  }).ToList();
-
+            ViewData["IDPhimOptions"] = (from s in db.Phims
+                                         select new SelectListItem
+                                         {
+                                             Value = s.IDPhim.ToString(),
+                                             Text = s.TenPhim.ToString()
+                                         }).ToList();
             // Return the view with the SuatChieu data
             return View(data);
         }

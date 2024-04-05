@@ -2,7 +2,15 @@
 @{
     Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
 }
+<style>
+    th {
+        color: red;
+    }
 
+    tr.separator {
+        border-bottom: 1px solid pink; /* Change border color to green */
+    }
+</style>
 
 @using (Html.BeginForm("Index", "BaoCaoThongKe", FormMethod.Post))
 {
@@ -44,7 +52,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="separator">
             <td>
                 @Html.DisplayFor(modelItem => item.TenHoaDon)
             </td>
@@ -62,6 +70,7 @@
             </td>
 
         </tr>
+
     }
 
     <h4>Tổng tiền : @ViewBag.TongTien</h4>

@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.ChoNgoi__SuatChieu>
+@{
+    Layout = null;
+}
+
+<style>
+
+
+
+    .form-container {
+        max-width: 600px;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .container1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .seat-map {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+
+    .custom-radio {
+        display: inline-block;
+        position: relative;
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: #eee;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        transition: background-color 0.3s;
+    }
+
+        .custom-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    .checkmark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 20px;
+        width: 20px;
+        background-color: #2196F3;
+        border-radius: 50%;
+        display: none;
+    }
+
+    .custom-radio input:checked + .checkmark {
+        display: block;
+    }
+
+    .btn-chose {
+        background-color: #2196F3;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-chose:hover {
+            background-color: #0d5cb6;
+        }
+
+    .custom-radio {
+        display: inline-block;
+        position: relative;
+        padding-left: 30px; /* Space for the custom radio button */
+        margin-right: 15px; /* Adjust the spacing between radio buttons */
+        cursor: pointer;
+    }
+
+        .custom-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+    }
+
+    .custom-radio input:checked + .checkmark {
+        background-color: #2196F3;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .custom-radio input:checked + .checkmark:after {
+        display: block;
+    }
+
+    .custom-radio .checkmark:after {
+        top: 7px;
+        left: 7px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .actions-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .detail-flight-container {
+        /* New styles to move DetailFlight content to the right */
+        flex: 1; /* Takes up remaining space in the container */
+        margin-left: 20px; /* Adjust the left margin as needed */
+    }
+</style>
+@using (Html.BeginForm("test", "Home"))
+{
+    var modelList = Model.ToList(); // Convert IEnumerable to List
+
+    for (int i = 0; i < modelList.Count(); i++)
+    {
+        var TenCho = i + 1;
+        <label class="custom-radio">
+            @if (modelList[i].trangthai != null)
+            {
+                <input type="radio" id="place @i" name="selectedPlace" value="Unavailable" autocomplete="off" disabled />
+                <span class="checkmark"></span>
+                @TenCho <p>(Sold out)</p>
+            }
+            else
+            {
+                <input type="radio" id="place @i" name="selectedPlace" value="@modelList[i].ChoNgoi_SuatChieu" autocomplete="off" />
+                <span class="checkmark"></span>
+                @TenCho
+            }
+        </label>
+    }
+    <input type="submit" class="btn btn-chose" value="Choose Seats">
+}
