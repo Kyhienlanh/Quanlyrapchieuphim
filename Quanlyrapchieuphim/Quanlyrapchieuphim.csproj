@@ -53,6 +53,9 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -182,6 +185,7 @@
     <Compile Include="Models\NguoiDung.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaypalConfiguration.cs" />
     <Compile Include="Models\Phim.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -284,6 +288,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\CSS\874dc6289c2576f1.css" />
+    <Content Include="Content\CSS\8871-e66fe10948f7d51e.js" />
+    <Content Include="Content\CSS\f42d14927d09df5f.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -297,6 +304,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\1736-ab90c2d8fe8acc57.js" />
+    <Content Include="Scripts\27-37612a9a387020fd.js" />
+    <Content Include="Scripts\4097-1ef28c7391afa7b9.js" />
+    <Content Include="Scripts\5283-6bc41a27f48430be.js" />
+    <Content Include="Scripts\8871-e66fe10948f7d51e.js" />
+    <Content Include="Scripts\9406-971c349612bfbc7d.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -322,7 +335,6 @@
     <Content Include="Areas\Admin\Views\QuanLyTaiKhoan\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyTaiKhoan\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLichChieuPhim\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyLichChieuPhim\Create.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLichChieuPhim\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLichChieuPhim\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\ViewPage1.cshtml" />
@@ -395,7 +407,10 @@
     <Content Include="Areas\Admin\Views\BaoCaoThongKe\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCaoThongKe\ThongKeTheoNgay.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCaoThongKe\ThongKeThangNam.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyLichChieuPhim\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\framework-8f8dab598177bbf8.js" />
+    <Content Include="Scripts\index-d824a32c9ab87178.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -405,7 +420,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main-ad51244e413a76a6.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\polyfills-c67a75d1b6f99dc8.js" />
+    <Content Include="Scripts\webpack-8026c3a914107c3b.js" />
+    <Content Include="Scripts\_app-6077f27ae7a8629e.js" />
+    <Content Include="Scripts\_buildManifest.js" />
+    <Content Include="Scripts\_ssgManifest.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -426,13 +447,25 @@
     <Content Include="Views\Login\confirmEmail.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Default\About.cshtml" />
+    <Content Include="Views\Home\PhimSapChieu.cshtml" />
+    <Content Include="Views\Home\PhimDangChieu.cshtml" />
+    <Content Include="Views\Home\ChiTietPhim.cshtml" />
+    <Content Include="Views\Home\LichChieu.cshtml" />
+    <Content Include="Views\Home\HoaDon.cshtml" />
+    <Content Include="Views\Home\ChoNgoi.cshtml" />
+    <Content Include="Views\Home\test.cshtml" />
+    <Content Include="Views\Home\DichVu.cshtml" />
+    <Content Include="Views\Home\ifdv.cshtml" />
+    <Content Include="Views\Home\TinhTien.cshtml" />
+    <Content Include="Views\Home\Xemlsgd.cshtml" />
+    <Content Include="Views\Home\FailureView.cshtml" />
+    <Content Include="Views\Home\SuccessView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\Admin\Views\ChiTietPhim\" />
-    <Folder Include="Content\css\" />
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\IMG\" />
     <Folder Include="Images\" />

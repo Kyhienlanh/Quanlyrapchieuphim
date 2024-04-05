@@ -1,23 +1,372 @@
-﻿using Quanlyrapchieuphim.Models;
+﻿using PayPal.Api;
+using Quanlyrapchieuphim.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace Quanlyrapchieuphim.Controllers
 {
     public class HomeController : Controller
     {
         // GET: Home
-        private QLRapChieuPhim1Entities a = new QLRapChieuPhim1Entities();
-                
+        private QLRapChieuPhim1Entities db = new QLRapChieuPhim1Entities();
+
 
         public ActionResult Index()
         {
-
-            
             return View();
         }
+        public ActionResult PhimSapChieu() 
+        {
+            var now = DateTime.Now;
+            var data = from s in db.Phims
+                       where s.KhoiChieu > now
+                       select s;
+            return View(data.ToList());
+        }
+        public ActionResult PhimDangChieu()
+        {
+            var now = DateTime.Now;
+            var data = from s in db.Phims
+                       where s.KhoiChieu < now
+                       select s;
+            return View(data.ToList());
+
+           
+        }
+        public ActionResult ChiTietPhim(int id)
+        {
+            Session["id"] = id;
+           
+            var data = from s in db.Phims
+                       where s.IDPhim == id
+                       select s;
+
+            return View(data.ToList());
+        }
+        public ActionResult LichChieu()
+        {
+            var now = DateTime.Now;
+            int id = (int)Session["id"];
+            ViewBag.Id = id;
+            var data = from s in db.SuatChieux
+                       where s.IDPhim == id && s.NgayChieu >= now
+                       select s;
+
+            return View(data.ToList());
+        }
+
+        public ActionResult ChoNgoi(int id)
+        {
+
+            if (Session["TaiKhoan"] == null)
+            {
+                Session["ReturnUrl"] = Request.UrlReferrer.AbsoluteUri;
+                return RedirectToAction("Index", "Login");
+            }
+                Session["IDSuatChieu"] = id;
+            var data = from s in db.ChoNgoi__SuatChieu
+                       where s.IDSuatChieu == id
+                       select s;
+            return View(data.ToList());
+        }
+      
+        public ActionResult HoaDon()
+        {
+            var data = from s in db.HoaDons
+                       where s.IDHoaDon == 2
+                       select s;
+            return View(data);
+        }
+        public ActionResult test(string selectedPlace)
+        {
+            if(selectedPlace !=null)
+            {
+                Session["ChoNgoi"] = selectedPlace;
+               
+               return RedirectToAction("DichVu");
+            }
+            ViewBag.ChoNgoi = Session["ChoNgoi"] as string;
+            return View();
+        }
+        [HttpGet]
+        public ActionResult DichVu()
+        {
+            var data = db.DichVus;
+            return View(data);
+        }
+        [HttpPost]
+        public ActionResult DichVu(IEnumerable<int> selectedServices)
+        {
+           
+            if (selectedServices != null && selectedServices.Any())
+            {
+                Session["SelectedServices"] = selectedServices.ToList();
+
+                return RedirectToAction("TinhTien");
+            }
+
+            return View();  
+        }
+
+        public ActionResult ifdv()
+        {
+            List<int> selectedServices = Session["SelectedServices"] as List<int>;
+
+            
+            ViewBag.iddv = selectedServices;
+            return View();
+        }
+        public ActionResult Xemlsgd()
+        {
+            if (Session["TaiKhoan"] == null)
+            {
+                Session["ReturnUrl"] = Request.UrlReferrer?.AbsoluteUri;
+                return RedirectToAction("Index", "Login");
+            }
+            string mail = Session["TaiKhoan"] as string;
+            int user = db.NguoiDungs.FirstOrDefault(s => s.Email == mail).IDNguoiDung;
+            var data=from s in db.Ve1
+                     where s.IDNguoiDung == user
+                     select s;
+            return View(data.ToList());
+        }
+        public ActionResult TinhTien()
+        {
+            List<int> selectedServices = Session["SelectedServices"] as List<int>;
+            int idPhim = (int)Session["id"];
+            int idSuatChieu = (int)Session["IDSuatChieu"];
+            string Email = Session["TaiKhoan"] as string;
+            int idChoNgoi;
+            float tongtien = 0;
+            int idve = 0;
+            List<DichVu> selectedServiceObjects = new List<DichVu>();
+            if (Session["ChoNgoi"] != null && int.TryParse(Session["ChoNgoi"].ToString(), out idChoNgoi))
+            {
+                var IDNguoiDungQuery = from s in db.NguoiDungs
+                                       where s.Email == Email
+                                       select s.IDNguoiDung;
+
+                     int IDNguoiDung = IDNguoiDungQuery.FirstOrDefault();
+             
+                    var ve = db.Ve1.FirstOrDefault(u => u.IDChoNgoi_SuatChieu == idChoNgoi);
+                    ve.IDNguoiDung = IDNguoiDung;
+                    tongtien += (int)ve.GiaVe;
+                    db.SaveChanges();
+                    idve = ve.IDVe;
+             
+                var ghe = db.ChoNgoi__SuatChieu.FirstOrDefault(s => s.ChoNgoi_SuatChieu == idChoNgoi);
+                ViewData["Ghe"] = ghe;
+            }
+            foreach (int serviceId in selectedServices)
+            {
+                DV_VE a=new DV_VE();
+                a.IDVe = idve;
+                a.IDDichVu = serviceId;
+                db.SaveChanges();
+
+                var service = db.DichVus.FirstOrDefault(s => s.IDDichVu == serviceId);
+                selectedServiceObjects.Add(service);
+                tongtien += (int)service.GiaTien; 
+            }
+            Session["TongTien"] = tongtien;
+            ViewBag.message = Session["TongTien"];
+
+            Phim Phim = db.Phims.FirstOrDefault(s => s.IDPhim == idPhim);
+            ViewData["Phim"] = Phim;
+            ViewData["SelectedServices"] = selectedServiceObjects;
+
+            return View();
+        }
+        public ActionResult FailureView()
+        {
+            return View();
+        }
+        public ActionResult SuccessView()
+        {
+           
+            // Return the SuccessView view if none of the above conditions are met
+            return View();
+        }
+
+        public ActionResult PaymentWithPaypal(string Cancel = null)
+        {
+            //getting the apiContext  
+            APIContext apiContext = PaypalConfiguration.GetAPIContext();
+            try
+            {
+                //A resource representing a Payer that funds a payment Payment Method as paypal  
+                //Payer Id will be returned when payment proceeds or click to pay  
+                string payerId = Request.Params["PayerID"];
+                if (string.IsNullOrEmpty(payerId))
+                {
+                    //this section will be executed first because PayerID doesn't exist  
+                    //it is returned by the create function call of the payment class  
+                    // Creating a payment  
+                    // baseURL is the url on which paypal sendsback the data.  
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Home/PaymentWithPayPal?";
+                    //here we are generating guid for storing the paymentID received in session  
+                    //which will be used in the payment execution  
+                    var guid = Convert.ToString((new Random()).Next(100000));
+                    //CreatePayment function gives us the payment approval url  
+                    //on which payer is redirected for paypal account payment  
+                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
+                    //get links returned from paypal in response to Create function call  
+                    var links = createdPayment.links.GetEnumerator();
+                    string paypalRedirectUrl = null;
+                    while (links.MoveNext())
+                    {
+                        Links lnk = links.Current;
+                        if (lnk.rel.ToLower().Trim().Equals("approval_url"))
+                        {
+                            //saving the payapalredirect URL to which user will be redirected for payment  
+                            paypalRedirectUrl = lnk.href;
+                        }
+                    }
+                    // saving the paymentID in the key guid  
+                    Session.Add(guid, createdPayment.id);
+                    return Redirect(paypalRedirectUrl);
+                }
+                else
+                {
+                    // This function exectues after receving all parameters for the payment  
+                    var guid = Request.Params["guid"];
+                    var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
+                    //If executed payment failed then we will show payment failure message to user  
+                    if (executedPayment.state.ToLower() != "approved")
+                    {
+                        return View("FailureView");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("FailureView");
+            }
+            //on successful payment, show success page to user.  
+            int idChoNgoi;
+            if (Session["ChoNgoi"] != null && int.TryParse(Session["ChoNgoi"].ToString(), out idChoNgoi))
+            {
+                // Retrieve the ticket with the IDChoNgoi_SuatChieu matching the ChoNgoi session value
+                var ve = db.Ve1.FirstOrDefault(s => s.IDChoNgoi_SuatChieu == idChoNgoi);
+                var ChoNgoi_SuatChieu= db.ChoNgoi__SuatChieu.FirstOrDefault(s => s.ChoNgoi_SuatChieu == idChoNgoi);
+                if (ve != null)
+                {
+                    // Update the ticket status to "Da Thanh Toan" (Paid)
+                    ve.TrangThai = "Da Thanh Toan";
+                    ChoNgoi_SuatChieu.trangthai= "Da Duoc Dat";
+                    db.SaveChanges(); // Save changes to the database
+
+                    // Redirect the user to the Index action of the Login controller
+                    return RedirectToAction("Index", "Login");
+                }
+                else
+                {
+                    // Redirect the user to the Index action if the ticket is not found
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return RedirectToAction("test");
+            }
+
+
+            return View("SuccessView");
+        }
+        private PayPal.Api.Payment payment;
+        private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
+        {
+            var paymentExecution = new PaymentExecution()
+            {
+                payer_id = payerId
+            };
+            this.payment = new Payment()
+            {
+                id = paymentId
+            };
+            return this.payment.Execute(apiContext, paymentExecution);
+        }
+        private Payment CreatePayment(APIContext apiContext, string redirectUrl)
+        {
+            int TotalAmount = 0; 
+            if (Session["TongTien"] != null && int.TryParse(Session["TongTien"].ToString(), out int amount1))
+            {
+                int amount11 = amount1 / 24000;
+                TotalAmount = amount11;
+            }
+            //create itemlist and add item objects to it  
+            var itemList = new ItemList()
+            {
+                items = new List<Item>()
+            };
+            //Adding Item Details like name, currency, price etc  
+          
+
+            itemList.items.Add(new Item()
+            {
+                name = "Vé xem phim",
+                currency = "USD",
+                price = TotalAmount.ToString(),
+                quantity = "1",
+                sku = "vé"
+            });
+            var payer = new Payer()
+            {
+                payment_method = "paypal"
+            };
+            // Configure Redirect Urls here with RedirectUrls object  
+            var redirUrls = new RedirectUrls()
+            {
+                cancel_url = redirectUrl + "&Cancel=true",
+                return_url = redirectUrl
+            };
+            var details = new Details()
+            {
+                tax = "0",
+                shipping = "0",
+                subtotal = TotalAmount.ToString()
+            };
+            var total = (Convert.ToDouble(details.tax) + Convert.ToDouble(details.shipping) + Convert.ToDouble(details.subtotal)).ToString();
+            //Final amount with details  
+            var amount = new Amount()
+            {
+                currency = "USD",
+                total = total.ToString(), // Total must be equal to sum of tax, shipping and subtotal.  
+                details = details
+            };
+            var transactionList = new List<Transaction>();
+            // Adding description about the transaction  
+            var paypalOrderId = DateTime.Now.Ticks;
+            transactionList.Add(new Transaction()
+            {
+                description = $"Invoice #{paypalOrderId}",
+                invoice_number = paypalOrderId.ToString(), //Generate an Invoice No    
+                amount = amount,
+                item_list = itemList
+            });
+            this.payment = new Payment()
+            {
+                intent = "sale",
+                payer = payer,
+                transactions = transactionList,
+                redirect_urls = redirUrls
+            };
+            // Create a payment using a APIContext  
+            return this.payment.Create(apiContext);
+        }
+
+
+
+
+
+
+
     }
+
 }
