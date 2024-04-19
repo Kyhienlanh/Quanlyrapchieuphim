@@ -328,6 +328,7 @@
             .movie-corner li:last-child {
                 margin-right: 0; /* Loại bỏ khoảng cách phía sau mục cuối cùng */
             }
+
     footer {
         background-color: #333;
         color: #fff;
@@ -403,6 +404,7 @@
         margin-top: 30px;
         font-size: 14px;
     }
+
     .review-movie {
         background-color: #f9f9f9;
         padding: 20px;
@@ -480,6 +482,7 @@
                     transform: scale(1.1);
                     cursor: pointer;
                 }
+
     .login-container {
         text-align: center; /* Căn giữa nội dung */
         margin-top: 20px; /* Khoảng cách từ phần trên của trang */
@@ -639,7 +642,35 @@
     });
 
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+
+    $(document).ready(function () {
+        // Đường dẫn đến action trong controller để chuyển hướng khi người dùng chọn thể loại phim
+        var redirectUrl = '/TimKiem/TimKiemTheoTheLoai';
+        
+        // Lấy danh sách thể loại phim và điền vào dropdown list khi trang được tải
+        $.get('/TimKiem/GetGenres', function (data) {
+            $.each(data, function (index, item) {
+                $('#genreDropdown').append($('<option>', {
+                    value: item,
+                    text: item
+                }));
+            });
+        });
+
+        // Xử lý sự kiện khi người dùng đã chọn một thể loại phim
+        $('#genreDropdown').change(function () {
+            var selectedGenre = $(this).val();
+            if (selectedGenre) {
+                // Chuyển hướng người dùng đến action trong controller với thể loại phim đã chọn
+                window.location.href = redirectUrl + '?genre=' + selectedGenre;
+            }
+        });
+    });
+
+</script>
 <header class="site-header">
 
     <div class="container">
@@ -647,7 +678,16 @@
             <div class="menu">
                 <ul>
                     <li><a href="#booking">Đặt vé</a></li>
-                    <li><a href="#movies">Phim</a></li>
+                    <li>
+                    <li>
+                        <div id="movieGenres">
+                            <select id="genreDropdown">
+                                <option value="">Thể loại</option>
+                            </select>
+                        </div>
+                    </li>
+
+                    </li>
                     <li><a href="#search">Tìm kiếm</a></li>
                     <li><a href="#cinema-corner">Góc điện ảnh</a></li>
                 </ul>
@@ -704,7 +744,6 @@
 
 
 
-
     <div class="option-container">
         <select class="form-control mb-2 small-option" id="phim">
             <option value="" disabled selected>1. Chọn phim</option>
@@ -722,6 +761,14 @@
         <button class="custom-button mt-2" id="mua-ve" disabled>Mua vé nhanh</button>
     </div>
 
+    <div>
+        @using (Html.BeginForm("TimKiemTheoTenPhim", "TimKiem", FormMethod.Post))
+        {
+            <input type="text" name="tenPhim" />
+            <button type="submit">Tìm kiếm</button>
+        }
+
+    </div>
     <div class="main_content">
         <div class="movie-section">
             <h3>PHIM</h3>
