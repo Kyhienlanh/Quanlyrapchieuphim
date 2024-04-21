@@ -463,6 +463,7 @@
     <Content Include="Views\TimKiem\TimKiemTheoTheLoai.cshtml" />
     <Content Include="Views\User\TaiKhoan.cshtml" />
     <Content Include="Views\User\Lichsugiaodich.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
