@@ -1,0 +1,30 @@
+﻿
+@model Quanlyrapchieuphim.Models.NguoiDung
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tài khoản</title>
+</head>
+<body>
+    <h2>Thông tin tài khoản</h2>
+    <div>
+        <label>Tên người dùng:</label>
+        <span>@Model.TenNguoiDung</span>
+    </div>
+    <div>
+        <label>Số điện thoại:</label>
+        <span>@Model.SoDienThoai</span>
+    </div>
+    <div>
+        <label>Email:</label>
+        <span>@Model.Email</span>
+    </div>
+    <div>
+        <label>Địa chỉ:</label>
+        <span>@Model.DiaChi</span>
+    </div>
+</body>
+</html>

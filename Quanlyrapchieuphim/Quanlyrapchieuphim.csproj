@@ -461,6 +461,8 @@
     <Content Include="Views\Home\SuccessView.cshtml" />
     <Content Include="Views\TimKiem\TimKiemTheoTenPhim.cshtml" />
     <Content Include="Views\TimKiem\TimKiemTheoTheLoai.cshtml" />
+    <Content Include="Views\User\TaiKhoan.cshtml" />
+    <Content Include="Views\User\Lichsugiaodich.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -473,7 +475,6 @@
     <Folder Include="Views\Datve\" />
     <Folder Include="Views\Suatchieu\" />
     <Folder Include="Views\Thanhtoan\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

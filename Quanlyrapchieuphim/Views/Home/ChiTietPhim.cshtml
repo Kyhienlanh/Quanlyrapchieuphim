@@ -848,7 +848,18 @@
         /* CSS đã được định nghĩa ở trên */
 
         /* Định dạng cho tiêu đề lịch chiếu */
+        .phim-container {
+            display: flex;
+            align-items: flex-start; /* Đặt hình ảnh ở đầu trên của phim-container */
+        }
 
+        .phim-content {
+            display: flex;
+        }
+
+        .phim-details {
+            margin-left: 40px; /* Khoảng cách giữa hình ảnh và phần nội dung */
+        }
 
     </style>
     <body>
@@ -856,18 +867,22 @@
         @foreach (var item in Model)
         {
             <div class="phim-container">
-
-                <img src="~/Images/@item.TenAnh" alt="Hình ảnh" onclick="showDetails(this)" data-phimid="@item.IDPhim" />
-                <div class="phim-details">
-                    <h2>@item.TenPhim</h2>
-                    <p><span style="font-weight:bold; color: gray">Thể loại: </span> @item.TheLoai</p>
-                    <p><span style="font-weight:bold; color: gray">Thời lượng:</span> @item.ThoiLuong phút</p>
-                    <p><span style="font-weight:bold; color: gray">Diễn viên:</span> @item.DienVien</p>
-                    <p><span style="font-weight: bold; color: gray">Đạo diễn:</span> @item.DaoDien</p>
-                    <!-- Thêm các thông tin khác về phim ở đây -->
+                <div class="phim-content">
+                    <img src="~/Images/@item.TenAnh" alt="Hình ảnh" onclick="showDetails(this)" data-phimid="@item.IDPhim" />
+                    <div class="phim-details">
+                        <h2>@item.TenPhim</h2>
+                        <p><span style="font-weight:bold; color: gray">Thể loại: </span> @item.TheLoai</p>
+                        <p><span style="font-weight:bold; color: gray">Thời lượng:</span> @item.ThoiLuong phút</p>
+                        <p><span style="font-weight:bold; color: gray">Diễn viên:</span> @item.DienVien</p>
+                        <p><span style="font-weight: bold; color: gray">Đạo diễn:</span> @item.DaoDien</p>
+                        <p style="word-wrap: break-word; overflow-wrap: break-word; white-space: pre-line;"><span style="font-weight: bold; color: gray">Nội dung:</span> @item.NoiDung</p>
+                        <!-- Thêm các thông tin khác về phim ở đây -->
+                    </div>
                 </div>
             </div>
         }
+
+
         <h1 class="lich-chieu">Lịch Chiếu</h1>
         @Html.Action("LichChieu", "Home")
         <footer>

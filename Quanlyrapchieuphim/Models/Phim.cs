@@ -29,6 +29,7 @@ namespace Quanlyrapchieuphim.Models
         public string NamSanXuat { get; set; }
         public string DaoDien { get; set; }
         public string DienVien { get; set; }
+        public string NoiDung { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuatChieu> SuatChieux { get; set; }

@@ -57,12 +57,15 @@ namespace Quanlyrapchieuphim.Controllers
             var now = DateTime.Now;
             int id = (int)Session["id"];
             ViewBag.Id = id;
-            var data = from s in db.SuatChieux
-                       where s.IDPhim == id && s.NgayChieu >= now
-                       select s;
 
-            return View(data.ToList());
+            var data = (from s in db.SuatChieux
+                        where s.IDPhim == id && s.NgayChieu >= now
+                        orderby s.NgayChieu // Sắp xếp theo thứ tự ngày
+                        select s).ToList();
+
+            return View(data);
         }
+
 
         public ActionResult ChoNgoi(int id)
         {

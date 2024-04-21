@@ -78,6 +78,7 @@
           <Property Name="NamSanXuat" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DaoDien" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DienVien" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="PhongChieu">
           <Key>
@@ -373,6 +374,7 @@
           <Property Name="DaoDien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DienVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="SuatChieux" Relationship="Self.FK_SuatChieu_Phim" FromRole="Phim" ToRole="SuatChieu" />
+          <Property Name="NoiDung" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PhongChieu">
           <Key>
@@ -699,6 +701,7 @@
           <EntitySetMapping Name="Phims">
             <EntityTypeMapping TypeName="QLRapChieuPhim1Model.Phim">
               <MappingFragment StoreEntitySet="Phim">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="IDPhim" ColumnName="IDPhim" />
                 <ScalarProperty Name="TenPhim" ColumnName="TenPhim" />
                 <ScalarProperty Name="TenAnh" ColumnName="TenAnh" />
