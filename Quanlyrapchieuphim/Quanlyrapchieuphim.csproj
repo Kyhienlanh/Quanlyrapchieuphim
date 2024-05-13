@@ -191,16 +191,7 @@
     <Compile Include="Models\PhongChieu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SuatChieu.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ve1.cs">
@@ -293,6 +284,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\bap-rang-bo.jpg" />
+    <Content Include="Images\nuoc-tinh-khiet-aquafina-15-lit-202309121105564852.jpg" />
+    <Content Include="Images\Screenshot 2024-05-07 195601.png" />
+    <Content Include="Images\Screenshot 2024-05-07 195731.png" />
+    <Content Include="Images\Screenshot 2024-05-07 195833.png" />
+    <Content Include="Images\Screenshot 2024-05-07 195840.png" />
+    <Content Include="Images\Screenshot 2024-05-07 195849.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -318,13 +316,6 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\QuanLyPhim\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyPhim\Create.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyPhim\Edit.cshtml" />
@@ -407,6 +398,13 @@
     <Content Include="Areas\Admin\Views\BaoCaoThongKe\ThongKeTheoNgay.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCaoThongKe\ThongKeThangNam.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLichChieuPhim\Create.cshtml" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\framework-8f8dab598177bbf8.js" />
     <Content Include="Scripts\index-d824a32c9ab87178.js" />
@@ -472,7 +470,6 @@
     <Folder Include="Areas\Admin\Views\ChiTietPhim\" />
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\IMG\" />
-    <Folder Include="Images\" />
     <Folder Include="Views\Datve\" />
     <Folder Include="Views\Suatchieu\" />
     <Folder Include="Views\Thanhtoan\" />

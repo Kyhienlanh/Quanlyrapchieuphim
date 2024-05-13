@@ -17,8 +17,8 @@ namespace Quanlyrapchieuphim.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SuatChieu()
         {
-            this.Ve1 = new HashSet<Ve1>();
             this.ChoNgoi__SuatChieu = new HashSet<ChoNgoi__SuatChieu>();
+            this.Ve1 = new HashSet<Ve1>();
         }
     
         public int IDSuatChieu { get; set; }
@@ -28,11 +28,11 @@ namespace Quanlyrapchieuphim.Models
         public int IDPhongChieu { get; set; }
         public int IDPhim { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChoNgoi__SuatChieu> ChoNgoi__SuatChieu { get; set; }
         public virtual Phim Phim { get; set; }
         public virtual PhongChieu PhongChieu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve1> Ve1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChoNgoi__SuatChieu> ChoNgoi__SuatChieu { get; set; }
     }
 }

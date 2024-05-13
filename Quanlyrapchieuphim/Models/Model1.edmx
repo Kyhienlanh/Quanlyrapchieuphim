@@ -28,6 +28,8 @@
           <Property Name="IDDichVu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenDichVu" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GiaTien" Type="float" Nullable="false" />
+          <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DV_VE">
           <Key>
@@ -98,16 +100,6 @@
           <Property Name="ThoiGianChieu" Type="time" Precision="7" Nullable="false" />
           <Property Name="IDPhongChieu" Type="int" Nullable="false" />
           <Property Name="IDPhim" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Ve1">
           <Key>
@@ -229,37 +221,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="QLRapChieuPhim1ModelStoreContainer">
           <EntitySet Name="ChoNgoi" EntityType="Self.ChoNgoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChoNgoi__SuatChieu" EntityType="Self.ChoNgoi__SuatChieu" Schema="dbo" store:Type="Tables" />
@@ -270,7 +231,6 @@
           <EntitySet Name="Phim" EntityType="Self.Phim" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhongChieu" EntityType="Self.PhongChieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SuatChieu" EntityType="Self.SuatChieu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ve1" EntityType="Self.Ve1" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ChoNgoi__SuatChieu_ChoNgoi" Association="Self.FK_ChoNgoi__SuatChieu_ChoNgoi">
             <End Role="ChoNgoi" EntitySet="ChoNgoi" />
@@ -319,7 +279,18 @@
           </Key>
           <Property Name="IDChoNgoi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenChoNgoi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ChoNgoi__SuatChieu" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_ChoNgoi" FromRole="ChoNgoi" ToRole="ChoNgoi__SuatChieu" />
+          <NavigationProperty Name="ChoNgoi__SuatChieu" Relationship="Self.FK_ChoNgoi__SuatChieu_ChoNgoi" FromRole="ChoNgoi" ToRole="ChoNgoi__SuatChieu" />
+        </EntityType>
+        <EntityType Name="ChoNgoi__SuatChieu">
+          <Key>
+            <PropertyRef Name="ChoNgoi_SuatChieu" />
+          </Key>
+          <Property Name="ChoNgoi_SuatChieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="trangthai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDSuatChieu" Type="Int32" />
+          <Property Name="IDChoNgoi" Type="Int32" />
+          <NavigationProperty Name="ChoNgoi" Relationship="Self.FK_ChoNgoi__SuatChieu_ChoNgoi" FromRole="ChoNgoi__SuatChieu" ToRole="ChoNgoi" />
+          <NavigationProperty Name="SuatChieu" Relationship="Self.FK_ChoNgoi__SuatChieu_SuatChieu" FromRole="ChoNgoi__SuatChieu" ToRole="SuatChieu" />
         </EntityType>
         <EntityType Name="DichVu">
           <Key>
@@ -328,7 +299,19 @@
           <Property Name="IDDichVu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GiaTien" Type="Double" Nullable="false" />
-          <NavigationProperty Name="DV_VE" Relationship="QLRapChieuPhim1Model.FK_DV_VE_DichVu" FromRole="DichVu" ToRole="DV_VE" />
+          <NavigationProperty Name="DV_VE" Relationship="Self.FK_DV_VE_DichVu" FromRole="DichVu" ToRole="DV_VE" />
+          <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DV_VE">
+          <Key>
+            <PropertyRef Name="IDDV_VE" />
+          </Key>
+          <Property Name="IDDichVu" Type="Int32" />
+          <Property Name="IDVe" Type="Int32" />
+          <Property Name="IDDV_VE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DichVu" Relationship="Self.FK_DV_VE_DichVu" FromRole="DV_VE" ToRole="DichVu" />
+          <NavigationProperty Name="Ve1" Relationship="Self.FK_DV_VE_Ve1" FromRole="DV_VE" ToRole="Ve1" />
         </EntityType>
         <EntityType Name="HoaDon">
           <Key>
@@ -357,8 +340,8 @@
           <Property Name="Quyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LoaiDangNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="XacNhanEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Ve1" Relationship="Self.FK_Ve1_NguoiDung" FromRole="NguoiDung" ToRole="Ve1" />
           <Property Name="MaXacNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ve1" Relationship="Self.FK_Ve1_NguoiDung" FromRole="NguoiDung" ToRole="Ve1" />
         </EntityType>
         <EntityType Name="Phim">
           <Key>
@@ -373,8 +356,8 @@
           <Property Name="NamSanXuat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DaoDien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DienVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="SuatChieux" Relationship="Self.FK_SuatChieu_Phim" FromRole="Phim" ToRole="SuatChieu" />
           <Property Name="NoiDung" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SuatChieux" Relationship="Self.FK_SuatChieu_Phim" FromRole="Phim" ToRole="SuatChieu" />
         </EntityType>
         <EntityType Name="PhongChieu">
           <Key>
@@ -395,20 +378,10 @@
           <Property Name="ThoiGianChieu" Type="Time" Nullable="false" Precision="7" />
           <Property Name="IDPhongChieu" Type="Int32" Nullable="false" />
           <Property Name="IDPhim" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChoNgoi__SuatChieu" Relationship="Self.FK_ChoNgoi__SuatChieu_SuatChieu" FromRole="SuatChieu" ToRole="ChoNgoi__SuatChieu" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_SuatChieu_Phim" FromRole="SuatChieu" ToRole="Phim" />
           <NavigationProperty Name="PhongChieu" Relationship="Self.FK_SuatChieu_PhongChieu" FromRole="SuatChieu" ToRole="PhongChieu" />
           <NavigationProperty Name="Ve1" Relationship="Self.FK_Ve1_SuatChieu" FromRole="SuatChieu" ToRole="Ve1" />
-          <NavigationProperty Name="ChoNgoi__SuatChieu" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_SuatChieu" FromRole="SuatChieu" ToRole="ChoNgoi__SuatChieu" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Ve1">
           <Key>
@@ -421,11 +394,59 @@
           <Property Name="IDChoNgoi_SuatChieu" Type="Int32" />
           <Property Name="IDSuatChieu" Type="Int32" />
           <Property Name="IDNguoiDung" Type="Int32" />
+          <NavigationProperty Name="DV_VE" Relationship="Self.FK_DV_VE_Ve1" FromRole="Ve1" ToRole="DV_VE" />
           <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_Ve1" FromRole="Ve1" ToRole="HoaDon" />
           <NavigationProperty Name="NguoiDung" Relationship="Self.FK_Ve1_NguoiDung" FromRole="Ve1" ToRole="NguoiDung" />
           <NavigationProperty Name="SuatChieu" Relationship="Self.FK_Ve1_SuatChieu" FromRole="Ve1" ToRole="SuatChieu" />
-          <NavigationProperty Name="DV_VE" Relationship="QLRapChieuPhim1Model.FK_DV_VE_Ve1" FromRole="Ve1" ToRole="DV_VE" />
         </EntityType>
+        <Association Name="FK_ChoNgoi__SuatChieu_ChoNgoi">
+          <End Role="ChoNgoi" Type="Self.ChoNgoi" Multiplicity="0..1" />
+          <End Role="ChoNgoi__SuatChieu" Type="Self.ChoNgoi__SuatChieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChoNgoi">
+              <PropertyRef Name="IDChoNgoi" />
+            </Principal>
+            <Dependent Role="ChoNgoi__SuatChieu">
+              <PropertyRef Name="IDChoNgoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChoNgoi__SuatChieu_SuatChieu">
+          <End Role="SuatChieu" Type="Self.SuatChieu" Multiplicity="0..1" />
+          <End Role="ChoNgoi__SuatChieu" Type="Self.ChoNgoi__SuatChieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuatChieu">
+              <PropertyRef Name="IDSuatChieu" />
+            </Principal>
+            <Dependent Role="ChoNgoi__SuatChieu">
+              <PropertyRef Name="IDSuatChieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DV_VE_DichVu">
+          <End Role="DichVu" Type="Self.DichVu" Multiplicity="0..1" />
+          <End Role="DV_VE" Type="Self.DV_VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DichVu">
+              <PropertyRef Name="IDDichVu" />
+            </Principal>
+            <Dependent Role="DV_VE">
+              <PropertyRef Name="IDDichVu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DV_VE_Ve1">
+          <End Role="Ve1" Type="Self.Ve1" Multiplicity="0..1" />
+          <End Role="DV_VE" Type="Self.DV_VE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ve1">
+              <PropertyRef Name="IDVe" />
+            </Principal>
+            <Dependent Role="DV_VE">
+              <PropertyRef Name="IDVe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HoaDon_Ve1">
           <End Role="Ve1" Type="Self.Ve1" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
@@ -488,14 +509,31 @@
         </Association>
         <EntityContainer Name="QLRapChieuPhim1Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChoNgois" EntityType="Self.ChoNgoi" />
+          <EntitySet Name="ChoNgoi__SuatChieu" EntityType="Self.ChoNgoi__SuatChieu" />
           <EntitySet Name="DichVus" EntityType="Self.DichVu" />
+          <EntitySet Name="DV_VE" EntityType="Self.DV_VE" />
           <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
           <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
           <EntitySet Name="Phims" EntityType="Self.Phim" />
           <EntitySet Name="PhongChieux" EntityType="Self.PhongChieu" />
           <EntitySet Name="SuatChieux" EntityType="Self.SuatChieu" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Ve1" EntityType="Self.Ve1" />
+          <AssociationSet Name="FK_ChoNgoi__SuatChieu_ChoNgoi" Association="Self.FK_ChoNgoi__SuatChieu_ChoNgoi">
+            <End Role="ChoNgoi" EntitySet="ChoNgois" />
+            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChoNgoi__SuatChieu_SuatChieu" Association="Self.FK_ChoNgoi__SuatChieu_SuatChieu">
+            <End Role="SuatChieu" EntitySet="SuatChieux" />
+            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DV_VE_DichVu" Association="Self.FK_DV_VE_DichVu">
+            <End Role="DichVu" EntitySet="DichVus" />
+            <End Role="DV_VE" EntitySet="DV_VE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DV_VE_Ve1" Association="Self.FK_DV_VE_Ve1">
+            <End Role="Ve1" EntitySet="Ve1" />
+            <End Role="DV_VE" EntitySet="DV_VE" />
+          </AssociationSet>
           <AssociationSet Name="FK_HoaDon_Ve1" Association="Self.FK_HoaDon_Ve1">
             <End Role="Ve1" EntitySet="Ve1" />
             <End Role="HoaDon" EntitySet="HoaDons" />
@@ -516,135 +554,7 @@
             <End Role="SuatChieu" EntitySet="SuatChieux" />
             <End Role="Ve1" EntitySet="Ve1" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QLRapChieuPhim1Model.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QLRapChieuPhim1Model.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="DV_VE" EntityType="QLRapChieuPhim1Model.DV_VE" />
-          <AssociationSet Name="FK_DV_VE_DichVu" Association="QLRapChieuPhim1Model.FK_DV_VE_DichVu">
-            <End Role="DichVu" EntitySet="DichVus" />
-            <End Role="DV_VE" EntitySet="DV_VE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DV_VE_Ve1" Association="QLRapChieuPhim1Model.FK_DV_VE_Ve1">
-            <End Role="Ve1" EntitySet="Ve1" />
-            <End Role="DV_VE" EntitySet="DV_VE" />
-          </AssociationSet>
-          <EntitySet Name="ChoNgoi__SuatChieu" EntityType="QLRapChieuPhim1Model.ChoNgoi__SuatChieu" />
-          <AssociationSet Name="FK_ChoNgoi__SuatChieu_ChoNgoi" Association="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_ChoNgoi">
-            <End Role="ChoNgoi" EntitySet="ChoNgois" />
-            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChoNgoi__SuatChieu_SuatChieu" Association="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_SuatChieu">
-            <End Role="SuatChieu" EntitySet="SuatChieux" />
-            <End Role="ChoNgoi__SuatChieu" EntitySet="ChoNgoi__SuatChieu" />
-          </AssociationSet>
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="DV_VE">
-          <Key>
-            <PropertyRef Name="IDDV_VE" />
-          </Key>
-          <Property Name="IDDichVu" Type="Int32" />
-          <Property Name="IDVe" Type="Int32" />
-          <Property Name="IDDV_VE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="DichVu" Relationship="QLRapChieuPhim1Model.FK_DV_VE_DichVu" FromRole="DV_VE" ToRole="DichVu" />
-          <NavigationProperty Name="Ve1" Relationship="QLRapChieuPhim1Model.FK_DV_VE_Ve1" FromRole="DV_VE" ToRole="Ve1" />
-        </EntityType>
-        <Association Name="FK_DV_VE_DichVu">
-          <End Type="QLRapChieuPhim1Model.DichVu" Role="DichVu" Multiplicity="0..1" />
-          <End Type="QLRapChieuPhim1Model.DV_VE" Role="DV_VE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DichVu">
-              <PropertyRef Name="IDDichVu" />
-            </Principal>
-            <Dependent Role="DV_VE">
-              <PropertyRef Name="IDDichVu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DV_VE_Ve1">
-          <End Type="QLRapChieuPhim1Model.Ve1" Role="Ve1" Multiplicity="0..1" />
-          <End Type="QLRapChieuPhim1Model.DV_VE" Role="DV_VE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ve1">
-              <PropertyRef Name="IDVe" />
-            </Principal>
-            <Dependent Role="DV_VE">
-              <PropertyRef Name="IDVe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ChoNgoi__SuatChieu">
-          <Key>
-            <PropertyRef Name="ChoNgoi_SuatChieu" />
-          </Key>
-          <Property Name="ChoNgoi_SuatChieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="trangthai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDSuatChieu" Type="Int32" />
-          <Property Name="IDChoNgoi" Type="Int32" />
-          <NavigationProperty Name="ChoNgoi" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_ChoNgoi" FromRole="ChoNgoi__SuatChieu" ToRole="ChoNgoi" />
-          <NavigationProperty Name="SuatChieu" Relationship="QLRapChieuPhim1Model.FK_ChoNgoi__SuatChieu_SuatChieu" FromRole="ChoNgoi__SuatChieu" ToRole="SuatChieu" />
-        </EntityType>
-        <Association Name="FK_ChoNgoi__SuatChieu_ChoNgoi">
-          <End Type="QLRapChieuPhim1Model.ChoNgoi" Role="ChoNgoi" Multiplicity="0..1" />
-          <End Type="QLRapChieuPhim1Model.ChoNgoi__SuatChieu" Role="ChoNgoi__SuatChieu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ChoNgoi">
-              <PropertyRef Name="IDChoNgoi" />
-            </Principal>
-            <Dependent Role="ChoNgoi__SuatChieu">
-              <PropertyRef Name="IDChoNgoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChoNgoi__SuatChieu_SuatChieu">
-          <End Type="QLRapChieuPhim1Model.SuatChieu" Role="SuatChieu" Multiplicity="0..1" />
-          <End Type="QLRapChieuPhim1Model.ChoNgoi__SuatChieu" Role="ChoNgoi__SuatChieu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SuatChieu">
-              <PropertyRef Name="IDSuatChieu" />
-            </Principal>
-            <Dependent Role="ChoNgoi__SuatChieu">
-              <PropertyRef Name="IDSuatChieu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -659,12 +569,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ChoNgoi__SuatChieu">
+            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.ChoNgoi__SuatChieu">
+              <MappingFragment StoreEntitySet="ChoNgoi__SuatChieu">
+                <ScalarProperty Name="ChoNgoi_SuatChieu" ColumnName="ChoNgoi_SuatChieu" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+                <ScalarProperty Name="IDSuatChieu" ColumnName="IDSuatChieu" />
+                <ScalarProperty Name="IDChoNgoi" ColumnName="IDChoNgoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DichVus">
             <EntityTypeMapping TypeName="QLRapChieuPhim1Model.DichVu">
               <MappingFragment StoreEntitySet="DichVu">
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="IDDichVu" ColumnName="IDDichVu" />
                 <ScalarProperty Name="TenDichVu" ColumnName="TenDichVu" />
                 <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DV_VE">
+            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.DV_VE">
+              <MappingFragment StoreEntitySet="DV_VE">
+                <ScalarProperty Name="IDDichVu" ColumnName="IDDichVu" />
+                <ScalarProperty Name="IDVe" ColumnName="IDVe" />
+                <ScalarProperty Name="IDDV_VE" ColumnName="IDDV_VE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -683,7 +614,6 @@
           <EntitySetMapping Name="NguoiDungs">
             <EntityTypeMapping TypeName="QLRapChieuPhim1Model.NguoiDung">
               <MappingFragment StoreEntitySet="NguoiDung">
-                <ScalarProperty Name="MaXacNhan" ColumnName="MaXacNhan" />
                 <ScalarProperty Name="IDNguoiDung" ColumnName="IDNguoiDung" />
                 <ScalarProperty Name="TenNguoiDung" ColumnName="TenNguoiDung" />
                 <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
@@ -695,13 +625,13 @@
                 <ScalarProperty Name="Quyen" ColumnName="Quyen" />
                 <ScalarProperty Name="LoaiDangNhap" ColumnName="LoaiDangNhap" />
                 <ScalarProperty Name="XacNhanEmail" ColumnName="XacNhanEmail" />
+                <ScalarProperty Name="MaXacNhan" ColumnName="MaXacNhan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Phims">
             <EntityTypeMapping TypeName="QLRapChieuPhim1Model.Phim">
               <MappingFragment StoreEntitySet="Phim">
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="IDPhim" ColumnName="IDPhim" />
                 <ScalarProperty Name="TenPhim" ColumnName="TenPhim" />
                 <ScalarProperty Name="TenAnh" ColumnName="TenAnh" />
@@ -711,6 +641,7 @@
                 <ScalarProperty Name="NamSanXuat" ColumnName="NamSanXuat" />
                 <ScalarProperty Name="DaoDien" ColumnName="DaoDien" />
                 <ScalarProperty Name="DienVien" ColumnName="DienVien" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -735,17 +666,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Ve1">
             <EntityTypeMapping TypeName="QLRapChieuPhim1Model.Ve1">
               <MappingFragment StoreEntitySet="Ve1">
@@ -756,49 +676,6 @@
                 <ScalarProperty Name="IDChoNgoi_SuatChieu" ColumnName="IDChoNgoi_SuatChieu" />
                 <ScalarProperty Name="IDSuatChieu" ColumnName="IDSuatChieu" />
                 <ScalarProperty Name="IDNguoiDung" ColumnName="IDNguoiDung" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QLRapChieuPhim1Model.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QLRapChieuPhim1Model.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QLRapChieuPhim1Model.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QLRapChieuPhim1Model.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLRapChieuPhim1Model.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QLRapChieuPhim1Model.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLRapChieuPhim1Model.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QLRapChieuPhim1Model.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QLRapChieuPhim1Model.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="DV_VE">
-            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.DV_VE">
-              <MappingFragment StoreEntitySet="DV_VE">
-                <ScalarProperty Name="IDDV_VE" ColumnName="IDDV_VE" />
-                <ScalarProperty Name="IDVe" ColumnName="IDVe" />
-                <ScalarProperty Name="IDDichVu" ColumnName="IDDichVu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChoNgoi__SuatChieu">
-            <EntityTypeMapping TypeName="QLRapChieuPhim1Model.ChoNgoi__SuatChieu">
-              <MappingFragment StoreEntitySet="ChoNgoi__SuatChieu">
-                <ScalarProperty Name="IDChoNgoi" ColumnName="IDChoNgoi" />
-                <ScalarProperty Name="IDSuatChieu" ColumnName="IDSuatChieu" />
-                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
-                <ScalarProperty Name="ChoNgoi_SuatChieu" ColumnName="ChoNgoi_SuatChieu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -8,76 +8,47 @@
 
 </head>
 <style>
-    /* Thiết lập font chữ và màu sắc */
     .site-header {
-        background-color: #333; /* Màu nền */
-        color: #fff; /* Màu chữ */
-        font-family: Tahoma, sans-serif; /* Font chữ */
+        background-color: #333;
+        color: #fff;
+        font-family: Tahoma, sans-serif;
     }
 
     .container {
-        width: 90%; /* Độ rộng của container */
-        margin: 0 auto; /* Căn giữa container */
+        width: 90%;
+        margin: 0 auto;
     }
 
     .site-navigation {
-        padding: 10px 0; /* Khoảng cách đệm */
+        padding: 10px 0;
     }
 
     .menu {
-        list-style: none; /* Ẩn chấm tròn danh sách */
+        list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    .custom-button1 {
-        padding: 10px 20px; /* Khoảng cách đệm bên trong nút */
-        font-size: 16px; /* Kích thước chữ */
-        font-weight: bold; /* Đậm */
-        text-transform: uppercase; /* Chuyển đổi chữ thành chữ in hoa */
-        color: #fff; /* Màu chữ */
-        background-color: #007bff; /* Màu nền */
-        border: none; /* Xóa viền */
-        border-radius: 5px; /* Bo tròn các góc */
-        cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua */
-        transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng hover */
-    }
-
-        .custom-button1:hover {
-            background-color: #0056b3; /* Màu nền khi di chuột qua */
+        .menu li {
+            display: inline-block;
         }
 
-        .custom-button1:active {
-            transform: translateY(2px); /* Hiệu ứng khi click */
-        }
-
-
-    .menu li {
-        display: inline-block; /* Hiển thị các mục menu trên cùng một dòng */
-    }
-
-        .menu li a {
-            display: block; /* Biến các liên kết thành các hộp có thể nhấp */
-            padding: 10px 20px; /* Khoảng cách đệm */
-            text-decoration: none; /* Loại bỏ gạch chân */
-            color: ghostwhite; /* Màu chữ */
-            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
-        }
-
-            .menu li a:hover {
-                background-color: #555; /* Màu nền khi di chuột qua */
+            .menu li a {
+                display: block;
+                padding: 10px 20px;
+                text-decoration: none;
+                color: ghostwhite;
             }
 
-    /* Kích thước và khoảng cách giữa các mục menu */
-    .login-container {
-        margin-left: 900px; /* Đẩy phần đăng nhập sang bên phải */
-        margin-top: -60px;
-    }
+                .menu li a:hover {
+                    background-color: #555;
+                }
 
+    .custom-button1,
     .custom-button {
         display: inline-block;
         padding: 10px 20px;
-        font-size: 16px;
+        font-size: 50px;
         font-weight: bold;
         text-transform: uppercase;
         color: #fff;
@@ -88,23 +59,22 @@
         transition: background-color 0.3s, transform 0.2s;
     }
 
+        .custom-button1:hover,
         .custom-button:hover {
             background-color: #0056b3;
         }
 
+        .custom-button1:active,
         .custom-button:active {
             transform: translateY(2px);
         }
 
-
-
-
     .banner {
         position: relative;
         width: 100%;
-        height: 200px; /* Điều chỉnh chiều cao của banner */
+        height: 200px;
         background-color: #f0f0f0;
-        overflow: hidden; /* Ẩn phần nội dung vượt ra ngoài */
+        overflow: hidden;
     }
 
     .banner-content {
@@ -116,15 +86,13 @@
         color: #333;
     }
 
-
     .carousel-item img {
-        object-fit: cover; /* Giữ nguyên vẹn hình ảnh không làm mờ */
-        max-height: 500px; /* Điều chỉnh chiều cao tối đa của hình ảnh */
-        width: auto; /* Tự động tính toán chiều rộng dựa trên chiều cao */
-        margin: auto; /* Căn giữa hình ảnh */
+        object-fit: cover;
+        max-height: 500px;
+        width: auto;
+        margin: auto;
     }
 
-    /* Thiết lập kiểu cho phần chọn phim, chọn ngày và chọn xuất chiếu */
     .container select {
         width: 100%;
         padding: 10px;
@@ -135,69 +103,6 @@
         color: #555;
         font-size: 16px;
     }
-
-    /* Thiết lập kiểu cho nút mua vé */
-    .custom-button {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #fff;
-        background-color: sandybrown;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-    }
-
-        .custom-button:hover {
-            background-color: #0056b3;
-        }
-
-        .custom-button:active {
-            transform: translateY(2px);
-        }
-
-    .row {
-        margin-bottom: -20px;
-    }
-
-    .option-container {
-        display: flex;
-        align-items: center;
-    }
-
-    .small-option {
-        flex: 1;
-        padding: 10px;
-        margin-right: 10px;
-        border: 1px solid #ccc; /* Thêm viền cho từng option nếu cần */
-        border-radius: 5px; /* Bo tròn các góc của option nếu cần */
-    }
-
-    .custom-button {
-        padding: 12px 30px; /* Điều chỉnh kích thước của nút */
-        font-size: 10px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #fff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 0px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-        margin-bottom: 15px;
-    }
-
-        .custom-button:hover {
-            background-color: #0056b3;
-        }
-
-        .custom-button:active {
-            transform: translateY(2px);
-        }
-
 
     #phim:disabled,
     #ngay:disabled,
@@ -215,104 +120,63 @@
             background-color: #0056b3;
         }
 
-    .small-option {
-        padding: 0; /* Loại bỏ padding */
-        margin: 0; /* Loại bỏ margin */
-        border: none; /* Loại bỏ viền */
-        background-color: transparent; /* Đặt màu nền là trong suốt */
-        font-size: 50px; /* Kích thước chữ */
-        height: 100px; /* Chiều cao của dropdown select */
-        line-height: 30px; /* Dòng chữ sẽ được căn giữa theo chiều cao */
+    .row {
+        margin-bottom: -20px;
     }
 
-    .movie-section {
-        margin-left: 50px;
+    .option-container {
         display: flex;
         align-items: center;
     }
 
+    .small-option {
+        flex: 1;
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 20px; /* Điều chỉnh khoảng cách từ phần tử trước */
+    }
+
+    
+    .movie-section {
+        margin-top: 20px; /* Điều chỉnh khoảng cách từ phần tử trước */
+    }
+
+
         .movie-section h3 {
             display: inline;
-            margin-right: 20px; /* Khoảng cách giữa tiêu đề và danh sách */
+            margin-left: 100px;
+            font-family: Geneva;
+            font-weight: bold; /* Thêm thuộc tính này để in đậm chữ */
+            font-size: 60px;
         }
+
 
         .movie-section ul {
             display: inline;
-            margin: 0; /* Loại bỏ margin mặc định của danh sách */
-            padding: 0; /* Loại bỏ padding mặc định của danh sách */
-            list-style: none; /* Ẩn dấu đầu dòng của danh sách */
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-bottom: 100px;
+            font-size: 20px;
         }
-
 
             .movie-section ul li {
                 display: inline;
-                margin-left: 10px; /* Khoảng cách giữa các mục trong danh sách */
+                margin-left: 10px;
+                
+                
+
             }
 
                 .movie-section ul li:first-child {
-                    margin-left: 0; /* Loại bỏ margin bên trái của mục đầu tiên */
+                    margin-left: 10px;
                 }
-
-    .movie-section {
-        position: relative;
-    }
-
-    #now-playing, #coming-soon {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-    }
-
-    #now-playing {
-        list-style-type: none;
-        padding: 0;
-        overflow: auto; /* Clear floats */
-    }
-
-        #now-playing li {
-            float: left; /* Hiển thị các phần tử li cùng một hàng ngang */
-            margin-right: 20px; /* Tạo khoảng cách giữa các phần tử li */
-        }
-
-            #now-playing li:last-child {
-                margin-right: 0; /* Loại bỏ margin-right của phần tử li cuối cùng */
-            }
-
-            #now-playing li img {
-                width: 300px; /* Tăng kích thước của hình ảnh */
-                height: auto; /* Giữ tỷ lệ khung hình */
-                display: block; /* Đảm bảo hình ảnh không bị tràn khỏi phần tử */
-                border-radius: 10px; /* Bo tròn các góc của hình ảnh */
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho hình ảnh */
-            }
-
-            #now-playing li p {
-                font-size: 16px; /* Tăng kích thước của văn bản */
-            }
-
-    .movie-section {
-        margin-top: 20px; /* Thêm khoảng cách 20px ở trên */
-        margin-bottom: 20px; /* Thêm khoảng cách 20px ở dưới */
-        position: relative;
-    }
-
-    /* CSS cho danh sách phim đang chiếu và sắp chiếu */
-    #now-playing,
-    #coming-soon {
-        margin-top: 20px; /* Thêm khoảng cách 20px ở trên */
-    }
-
-    .movie-section ul li p {
-        font-weight: bold; /* In đậm cho tên phim */
-    }
-
 
     .review-movie {
         margin-top: 700px;
     }
-
-
 
     .movie-corner {
         list-style: none;
@@ -322,11 +186,11 @@
 
         .movie-corner li {
             display: inline-block;
-            margin-right: 20px; /* Khoảng cách giữa các mục */
+            margin-right: 20px;
         }
 
             .movie-corner li:last-child {
-                margin-right: 0; /* Loại bỏ khoảng cách phía sau mục cuối cùng */
+                margin-right: 0;
             }
 
     footer {
@@ -417,102 +281,111 @@
             color: #333;
             margin-bottom: 15px;
             display: inline-block;
-            margin-right: 20px; /* Đảm bảo có khoảng cách giữa h3 và ul */
-        }
-
-    .movie-corner {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 20px;
-        display: inline-block;
-    }
-
-        .movie-corner li {
-            display: inline-block;
             margin-right: 20px;
         }
 
-            .movie-corner li:last-child {
-                margin-right: 0;
-            }
-
-            .movie-corner li a {
-                text-decoration: none;
-                color: #333;
-                font-size: 16px;
-            }
-
-                .movie-corner li a:hover {
-                    color: #ffa500;
-                }
-
-    .review-movie ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-        .review-movie ul li {
-            display: inline-block;
-            margin-right: 20px;
-            vertical-align: top;
+        .review-movie ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-            .review-movie ul li:last-child {
-                margin-right: 0;
+            .review-movie ul li {
+                display: inline-block;
+                margin-right: 20px;
+                vertical-align: top;
             }
 
-            .review-movie ul li img {
-                border-radius: 5px;
-            }
-
-            .review-movie ul li p {
-                font-size: 16px;
-                color: #333;
-                margin-top: 10px;
-            }
-
-            .review-movie ul li img {
-                border-radius: 5px;
-                transition: transform 0.3s ease, opacity 0.3s ease;
-            }
-
-                .review-movie ul li img:hover {
-                    opacity: 0.8;
-                    transform: scale(1.1);
-                    cursor: pointer;
+                .review-movie ul li:last-child {
+                    margin-right: 0;
                 }
+
+                .review-movie ul li img {
+                    border-radius: 5px;
+                }
+
+                .review-movie ul li p {
+                    font-size: 16px;
+                    color: #333;
+                    margin-top: 10px;
+                }
+
+                .review-movie ul li img {
+                    border-radius: 5px;
+                    transition: transform 0.3s ease, opacity 0.3s ease;
+                }
+
+                    .review-movie ul li img:hover {
+                        opacity: 0.8;
+                        transform: scale(1.1);
+                        cursor: pointer;
+                    }
 
     .login-container {
-        text-align: center; /* Căn giữa nội dung */
-        margin-top: 20px; /* Khoảng cách từ phần trên của trang */
+        text-align: right;
+        margin-top: -65px;
     }
 
         .login-container button {
             padding: 5px 10px;
-            background-color: transparent; /* Màu nền trong suốt */
-            color: white; /* Màu chữ */
-            border: 2px solid white; /* Viền */
+            background-color: #007bff;
+            color: white;
+           
             border-radius: 5px;
             cursor: pointer;
-            text-decoration: none; /* Loại bỏ gạch chân mặc định trên liên kết */
-            transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
 
             .login-container button:hover {
-                background-color: white; /* Màu nền khi di chuột vào */
-                color: black; /* Màu chữ khi di chuột vào */
+                background-color: white;
+                color: black;
             }
 
             .login-container button a {
-                color: white; /* Màu chữ cho liên kết */
-                text-decoration: none; /* Loại bỏ gạch chân */
+                color: white;
+                text-decoration: none;
             }
 
                 .login-container button a:hover {
-                    color: black; /* Màu chữ khi di chuột vào */
-                    text-decoration: none; /* Loại bỏ gạch chân khi di chuột vào */
+                    color: black;
+                    text-decoration: none;
                 }
+    .search-container {
+        display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử bên trong */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+        background-color: #f3f3f3; /* Màu nền */
+        padding: 5px; /* Khoảng cách giữa các phần tử */
+        border-radius: 5px; /* Bo tròn các góc */
+    }
+
+        .search-container input[type="text"] {
+            padding: 12px; /* Khoảng cách bên trong input */
+            width: 600px; /* Tăng kích thước của ô tìm kiếm */
+            border: none; /* Loại bỏ viền */
+            border-radius: 3px; /* Bo tròn góc input */
+            margin-right: 5px; /* Khoảng cách giữa input và button */
+        }
+
+        .search-container button[type="submit"] {
+            padding: 8px 15px; /* Kích thước của button */
+            background-color: #007bff; /* Màu nền */
+            color: white; /* Màu chữ */
+            border: none; /* Loại bỏ viền */
+            border-radius: 3px; /* Bo tròn góc button */
+            cursor: pointer; /* Con trỏ khi di chuột qua */
+            transition: background-color 0.3s ease; /* Hiệu ứng màu nền khi hover */
+        }
+
+            .search-container button[type="submit"]:hover {
+                background-color: #0056b3; /* Màu nền khi hover */
+            }
+
+
+
+
+    
 </style>
 <script>
     $(document).ready(function () {
@@ -677,7 +550,7 @@
         <nav class="site-navigation">
             <div class="menu">
                 <ul>
-                    <li><a href="#booking">Đặt vé</a></li>
+                    <li><a href="https://localhost:44371/">Phim</a></li>
                     <li>
                     <li>
                         <div id="movieGenres">
@@ -687,7 +560,7 @@
                         </div>
                     </li>
 
-                    </li>
+                    
                     <li><a href="#search">Tìm kiếm</a></li>
                     <li><a href="#cinema-corner">Góc điện ảnh</a></li>
                 </ul>
@@ -696,12 +569,14 @@
 
                 @if (Session["TaiKhoan"] == null)
                 {
-                    <button> <a href="@Url.Action("Index", "Login")">Đăng nhập</a></button>
-                    <button> <a href="@Url.Action("Register", "Login")">Đăng Kí</a></button>
+                    <button><a href="@Url.Action("Index", "Login")">Đăng nhập</a></button>
+                    <button><a href="@Url.Action("Register", "Login")">Đăng Ký</a></button>
+
                 }
                 else
                 {
                     <button><a href="@Url.Action("delete", "Login")">Đăng xuất</a></button>
+                    <button>@Html.ActionLink("Tài khoản","Index", "User")</button>
                 }
 
 
@@ -744,31 +619,18 @@
 
 
 
-    <div class="option-container">
-        <select class="form-control mb-2 small-option" id="phim">
-            <option value="" disabled selected>1. Chọn phim</option>
-            @Html.Action("PhimDangChieu", "Home")
-        </select>
-        <select class="form-control mb-2 small-option" id="ngay" disabled>
-            <option value="" disabled selected>2.Chọn ngày</option>
 
-            <!-- Danh sách các ngày -->
-        </select>
-        <select class="form-control mb-2 small-option" id="xuatchieu" disabled>
-            <option value="" disabled selected>3.Chọn xuất chiếu</option>
-            <!-- Danh sách các xuất chiếu -->
-        </select>
-        <button class="custom-button mt-2" id="mua-ve" disabled>Mua vé nhanh</button>
-    </div>
-
-    <div>
+    <div class="search-container">
         @using (Html.BeginForm("TimKiemTheoTenPhim", "TimKiem", FormMethod.Post))
         {
-            <input type="text" name="tenPhim" />
+            <input type="text" name="tenPhim" placeholder="Tìm kiếm...">
             <button type="submit">Tìm kiếm</button>
         }
 
     </div>
+
+
+
     <div class="main_content">
         <div class="movie-section">
             <h3>PHIM</h3>
@@ -794,24 +656,7 @@
         </div>
 
     </div>
-    <div class="review-movie">
-        <h3>GÓC ĐIỆN ẢNH</h3>
-        <ul class="movie-corner">
-            <li><a href="#" onclick="showNowPlaying()">Bình luận phim</a></li>
-            <li><a href="#" onclick="showComingSoon()">Blog điện ảnh</a></li>
-        </ul>
 
-        <ul>
-            <li>
-                <img src="~/Images/20210115_211641.jpg" alt="Review" width="200" height="200">
-                <p>[Review] Godzilla x Kong The New Empire: Khi Nhà Làm Phim “Chiều” Fan Hết Cỡ!</p>
-            </li>
-            <li>
-                <img src="~/Images/20210115_211641.jpg" alt="Review" width="200" height="200">
-                <p>[Review] Exhuma Quật Mộ Trùng Ma: Bom Tấn Hàn Quốc Đáng Xem Nhất 2024?</p>
-            </li>
-        </ul>
-    </div>
 
     <footer>
         <div class="container">

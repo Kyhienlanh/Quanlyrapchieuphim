@@ -8,145 +8,47 @@
     Layout = null;
 }
 <style>
-    /* CSS styles go here */
-    .seat-map {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .custom-radio {
-        position: relative;
-        width: 40px; /* Chiều rộng của ghế */
-        height: 40px; /* Chiều cao của ghế */
-        margin: 5px; /* Khoảng cách giữa các ghế */
-        border-radius: 50%; /* Hình dạng của ghế (hình tròn) */
-        background-color: #ccc; /* Màu sắc của ghế */
-        cursor: pointer;
-        display: flex;
-        justify-content: center; /* Căn giữa theo chiều ngang */
-        align-items: center; /* Căn giữa theo chiều dọc */
-        transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu sắc */
-        margin-top: 30px;
-    }
-
-        .custom-radio input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-            .custom-radio input:checked + .checkmark {
-                display: block;
-            }
-
-    .checkmark {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 10px; /* Chiều cao của dấu check */
-        width: 10px; /* Chiều rộng của dấu check */
-        background-color: #2196F3; /* Màu sắc của dấu check */
-        border-radius: 50%; /* Hình dạng của dấu check (hình tròn) */
-        display: none; /* Ẩn dấu check ban đầu */
-    }
-
-    .btn-chose {
-        background-color: darkorange;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        font-size: 20px;
-        font-weight: bold;
-        border-radius: 10px;
-        transition: background-color 0.3s;
-        display: inline-block; /* Thay đổi từ block thành inline-block */
-        margin-left: 1100px; /* Điều chỉnh khoảng cách so với các vị trí chỗ ngồi */
-        margin-top: -90px; /* Thay đổi margin-top để căn giữa theo chiều dọc */
-    }
-
-
-        .btn-chose:hover {
-            background-color: #0d5cb6;
-        }
-
-    .custom-radio p {
-        margin: 0;
-        font-size: 12px;
-        color: #999;
-    }
-
     .site-header {
-        background-color: #333; /* Màu nền */
-        color: #fff; /* Màu chữ */
-        font-family: Tahoma, sans-serif; /* Font chữ */
+        background-color: #333;
+        color: #fff;
+        font-family: Tahoma, sans-serif;
     }
 
     .container {
-        width: 90%; /* Độ rộng của container */
-        margin: 0 auto; /* Căn giữa container */
+        width: 90%;
+        margin: 0 auto;
     }
 
     .site-navigation {
-        padding: 10px 0; /* Khoảng cách đệm */
+        padding: 10px 0;
     }
 
     .menu {
-        list-style: none; /* Ẩn chấm tròn danh sách */
+        list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    .custom-button1 {
-        padding: 10px 20px; /* Khoảng cách đệm bên trong nút */
-        font-size: 16px; /* Kích thước chữ */
-        font-weight: bold; /* Đậm */
-        text-transform: uppercase; /* Chuyển đổi chữ thành chữ in hoa */
-        color: blue; /* Màu chữ */
-        background-color: #007bff; /* Màu nền */
-        border: none; /* Xóa viền */
-        border-radius: 5px; /* Bo tròn các góc */
-        cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua */
-        transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng hover */
-    }
-
-        .custom-button1:hover {
-            background-color: #0056b3; /* Màu nền khi di chuột qua */
+        .menu li {
+            display: inline-block;
         }
 
-        .custom-button1:active {
-            transform: translateY(2px); /* Hiệu ứng khi click */
-        }
-
-
-    .menu li {
-        display: inline-block; /* Hiển thị các mục menu trên cùng một dòng */
-    }
-
-        .menu li a {
-            display: block; /* Biến các liên kết thành các hộp có thể nhấp */
-            padding: 10px 20px; /* Khoảng cách đệm */
-            text-decoration: none; /* Loại bỏ gạch chân */
-            color: ghostwhite; /* Màu chữ */
-            transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
-        }
-
-            .menu li a:hover {
-                background-color: #555; /* Màu nền khi di chuột qua */
+            .menu li a {
+                display: block;
+                padding: 10px 20px;
+                text-decoration: none;
+                color: ghostwhite;
             }
 
-    /* Kích thước và khoảng cách giữa các mục menu */
-    .login-container {
-        margin-left: 900px; /* Đẩy phần đăng nhập sang bên phải */
-        margin-top: -60px;
-    }
+                .menu li a:hover {
+                    background-color: #555;
+                }
 
+    .custom-button1,
     .custom-button {
         display: inline-block;
         padding: 10px 20px;
-        font-size: 16px;
+        font-size: 50px;
         font-weight: bold;
         text-transform: uppercase;
         color: #fff;
@@ -157,23 +59,22 @@
         transition: background-color 0.3s, transform 0.2s;
     }
 
+        .custom-button1:hover,
         .custom-button:hover {
             background-color: #0056b3;
         }
 
+        .custom-button1:active,
         .custom-button:active {
             transform: translateY(2px);
         }
 
-
-
-
     .banner {
         position: relative;
         width: 100%;
-        height: 200px; /* Điều chỉnh chiều cao của banner */
+        height: 200px;
         background-color: #f0f0f0;
-        overflow: hidden; /* Ẩn phần nội dung vượt ra ngoài */
+        overflow: hidden;
     }
 
     .banner-content {
@@ -185,15 +86,13 @@
         color: #333;
     }
 
-
     .carousel-item img {
-        object-fit: cover; /* Giữ nguyên vẹn hình ảnh không làm mờ */
-        max-height: 500px; /* Điều chỉnh chiều cao tối đa của hình ảnh */
-        width: auto; /* Tự động tính toán chiều rộng dựa trên chiều cao */
-        margin: auto; /* Căn giữa hình ảnh */
+        object-fit: cover;
+        max-height: 500px;
+        width: auto;
+        margin: auto;
     }
 
-    /* Thiết lập kiểu cho phần chọn phim, chọn ngày và chọn xuất chiếu */
     .container select {
         width: 100%;
         padding: 10px;
@@ -205,27 +104,20 @@
         font-size: 16px;
     }
 
-    /* Thiết lập kiểu cho nút mua vé */
-    .custom-button {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #fff;
-        background-color: sandybrown;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
+    #phim:disabled,
+    #ngay:disabled,
+    #xuatchieu:disabled,
+    #mua-ve:disabled {
+        background-color: #eee;
+        cursor: not-allowed;
     }
 
-        .custom-button:hover {
-            background-color: #0056b3;
-        }
+    #mua-ve:enabled {
+        background-color: #007bff;
+    }
 
-        .custom-button:active {
-            transform: translateY(2px);
+        #mua-ve:enabled:hover {
+            background-color: #0056b3;
         }
 
     .row {
@@ -241,49 +133,63 @@
         flex: 1;
         padding: 10px;
         margin-right: 10px;
-        border: 1px solid #ccc; /* Thêm viền cho từng option nếu cần */
-        border-radius: 5px; /* Bo tròn các góc của option nếu cần */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 20px; /* Điều chỉnh khoảng cách từ phần tử trước */
     }
 
-    .custom-button {
-        padding: 12px 30px; /* Điều chỉnh kích thước của nút */
-        font-size: 10px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #fff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 0px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-        margin-bottom: 15px;
+
+    .movie-section {
+        margin-top: 20px; /* Điều chỉnh khoảng cách từ phần tử trước */
     }
 
-        .custom-button:hover {
-            background-color: #0056b3;
+
+        .movie-section h3 {
+            display: inline;
+            margin-left: 100px;
+            font-family: Geneva;
+            font-weight: bold; /* Thêm thuộc tính này để in đậm chữ */
+            font-size: 60px;
         }
 
-        .custom-button:active {
-            transform: translateY(2px);
+
+        .movie-section ul {
+            display: inline;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-bottom: 100px;
+            font-size: 20px;
         }
 
-    .separator-line {
-        width: 70%; /* Độ rộng của đường thẳng */
-        margin: 20px auto; /* Khoảng cách từ đường thẳng đến các vị trí chỗ ngồi */
-        border: none; /* Loại bỏ viền */
-        height: 2px; /* Chiều cao của đường thẳng */
-        background-color: orange; /* Màu sắc của đường thẳng */
+            .movie-section ul li {
+                display: inline;
+                margin-left: 10px;
+            }
+
+                .movie-section ul li:first-child {
+                    margin-left: 10px;
+                }
+
+    .review-movie {
+        margin-top: 700px;
     }
 
-    .centered-h5 {
-        text-align: center; /* Căn giữa văn bản */
-        color: darkorange; /* Màu chữ */
-        position: absolute; /* Đặt phần tử tương đối với phần tử cha */
-        top: 50%; /* Đưa phần tử lên trên 50% của phần tử cha */
-        left: 50%; /* Đưa phần tử sang phải 50% của phần tử cha */
-        transform: translate(-50%, -50%); /* Dịch chuyển phần tử đi 50% theo chiều ngang và dọc */
-        margin-top: 543px;
+    .movie-corner {
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
+
+        .movie-corner li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+            .movie-corner li:last-child {
+                margin-right: 0;
+            }
+
     footer {
         background-color: #333;
         color: #fff;
@@ -359,19 +265,161 @@
         margin-top: 30px;
         font-size: 14px;
     }
+
+    .review-movie {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 30px;
+    }
+
+        .review-movie h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .review-movie ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .review-movie ul li {
+                display: inline-block;
+                margin-right: 20px;
+                vertical-align: top;
+            }
+
+                .review-movie ul li:last-child {
+                    margin-right: 0;
+                }
+
+                .review-movie ul li img {
+                    border-radius: 5px;
+                }
+
+                .review-movie ul li p {
+                    font-size: 16px;
+                    color: #333;
+                    margin-top: 10px;
+                }
+
+                .review-movie ul li img {
+                    border-radius: 5px;
+                    transition: transform 0.3s ease, opacity 0.3s ease;
+                }
+
+                    .review-movie ul li img:hover {
+                        opacity: 0.8;
+                        transform: scale(1.1);
+                        cursor: pointer;
+                    }
+
+    .login-container {
+        text-align: right;
+        margin-top: -65px;
+    }
+
+        .login-container button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .login-container button:hover {
+                background-color: white;
+                color: black;
+            }
+
+            .login-container button a {
+                color: white;
+                text-decoration: none;
+            }
+
+                .login-container button a:hover {
+                    color: black;
+                    text-decoration: none;
+                }
+
+    .search-container {
+        display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử bên trong */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+        background-color: #f3f3f3; /* Màu nền */
+        padding: 5px; /* Khoảng cách giữa các phần tử */
+        border-radius: 5px; /* Bo tròn các góc */
+    }
+
+        .search-container input[type="text"] {
+            padding: 12px; /* Khoảng cách bên trong input */
+            width: 600px; /* Tăng kích thước của ô tìm kiếm */
+            border: none; /* Loại bỏ viền */
+            border-radius: 3px; /* Bo tròn góc input */
+            margin-right: 5px; /* Khoảng cách giữa input và button */
+        }
+
+        .search-container button[type="submit"] {
+            padding: 8px 15px; /* Kích thước của button */
+            background-color: #007bff; /* Màu nền */
+            color: white; /* Màu chữ */
+            border: none; /* Loại bỏ viền */
+            border-radius: 3px; /* Bo tròn góc button */
+            cursor: pointer; /* Con trỏ khi di chuột qua */
+            transition: background-color 0.3s ease; /* Hiệu ứng màu nền khi hover */
+        }
+
+            .search-container button[type="submit"]:hover {
+                background-color: #0056b3; /* Màu nền khi hover */
+            }
+    .vertical-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        grid-gap: 28px;
+        margin-left: 500px;
+        margin-top: -710px;
+    }
+
+        .vertical-grid img {
+            width: 12%;
+            height: 100%;
+            object-fit: cover;
+        }
 </style>
+    
+
+
+
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Thư viện JavaScript jQuery và Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <header class="site-header">
+
     <div class="container">
         <nav class="site-navigation">
             <div class="menu">
                 <ul>
-                    <li><a href="#booking">Đặt vé</a></li>
-                    <li><a href="#movies">Phim</a></li>
+                    <li><a href="https://localhost:44371/">Phim</a></li>
+                    <li>
+                    <li>
+                        <div id="movieGenres">
+                            <select id="genreDropdown">
+                                <option value="">Thể loại</option>
+                            </select>
+                        </div>
+                    </li>
+
+
                     <li><a href="#search">Tìm kiếm</a></li>
                     <li><a href="#cinema-corner">Góc điện ảnh</a></li>
                 </ul>
@@ -380,11 +428,14 @@
 
                 @if (Session["TaiKhoan"] == null)
                 {
-                    <button> <a href="@Url.Action("Index", "Login")">Đăng nhập</a></button>
+                    <button><a href="@Url.Action("", "Login")">Đăng nhập</a></button>
+                    <button><a href="@Url.Action("Register", "Login")">Đăng Ký</a></button>
+
                 }
                 else
                 {
                     <button><a href="@Url.Action("delete", "Login")">Đăng xuất</a></button>
+                    <button>@Html.ActionLink("Tài khoản", "Index", "User")</button>
                 }
 
 
@@ -396,71 +447,45 @@
 
 <body>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/Images/god-x-kong-2048_1711942313253.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="~/Images/mobile-suit-gundam-seed-freedom-3_1712027621954.jpg" class="d-block w-100" alt="...">
-
-            </div>
-            <div class="carousel-item">
-                <img src="~/Images/18x2-2048_1712028163819.jpg" class="d-block w-100" alt="...">
-            </div>
-
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
 
 
 
     @using (Html.BeginForm("DichVu", "Home", FormMethod.Post))
     {
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TenDichVu)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GiaTien)
-                </th>
-                <th>
-                    Chọn
-                </th>
-            </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenDichVu)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.GiaTien)
-                    </td>
-                    <td>
-                        <input type="checkbox" name="selectedServices" value="@item.IDDichVu" />
+    <div class="service-container">
+        @foreach (var item in Model)
+        {
 
-                    </td>
-                </tr>
-            }
+        <div class="service-item">
 
-        </table>
+            <div class="service-details">
+                <span class="service-name">@item.TenDichVu</span>
+                <span class="service-price">Giá tiền: @item.GiaTien</span>
+                <span class="service-mota">@item.MoTa</span>
+
+            </div>
+            <div class="service-checkbox">
+                <input type="checkbox" name="selectedServices" value="@item.IDDichVu" />
+            </div>
+
+        </div>
+
+        }
+           </div>
+    <div class="vertical-grid">
+        <img src="~/Images/Screenshot 2024-05-07 195849.png" />
+        <img src="~/Images/Screenshot 2024-05-07 195840.png" />
+        <img src="~/Images/Screenshot 2024-05-07 195833.png" />
+        <img src="~/Images/bap-rang-bo.jpg" />
+        <img src="~/Images/nuoc-tinh-khiet-aquafina-15-lit-202309121105564852.jpg" />
+        
+        <img src="~/Images/Screenshot 2024-05-07 195731.png" />
+    </div>
+        
         <button type="submit" class="btn-submit">Xác nhận</button>
     }
+
 
     <style>
         .btn-submit {
@@ -474,39 +499,53 @@
             cursor: pointer;
             display: flex;
             justify-content: center;
+            margin-top: 70px;
         }
 
             .btn-submit:hover {
                 background-color: #0069d9;
             }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            max-width: 800px; /* Điều chỉnh kích thước của khung */
-            margin: 0 auto; /* Để căn giữa khung */
-            border: 1px solid #ddd; /* Định dạng khung */
-            border-radius: 5px; /* Định dạng khung */
-            overflow-x: auto; /* Cho phép cuộn ngang nếu bảng quá rộng */
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            margin-left: 650px;
+            margin-top: 20px; /* Di chuyển lên trên một chút */
+            width: 35%;
         }
 
-        .table th, .table td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .service-image {
+            flex: 0 0 80px; /* Kích thước cố định cho phần ảnh */
+            margin-right: 10px; /* Khoảng cách giữa ảnh và nội dung */
         }
 
-        .table th {
-            background-color: cornflowerblue;
-            color: white;
+        .service-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .table tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .service-name {
+            font-weight: bold;
+            margin-bottom: 3px; /* Khoảng cách giữa tên dịch vụ và giá tiền */
         }
 
-        .table tr:hover {
-            background-color: #ddd;
+        .service-price {
+            color: #007bff; /* Màu sắc cho giá tiền */
+            margin-bottom: 3px; /* Khoảng cách giữa giá tiền và mô tả */
+        }
+
+        .service-mota {
+            font-style: italic;
+        }
+        .service-checkbox input[type="checkbox"] {
+            width: 20px; /* Đặt chiều rộng của checkbox là 20px */
+            height: 20px; /* Đặt chiều cao của checkbox là 20px */
         }
 
         h2 {

@@ -12,14 +12,7 @@
     }
 </style>
 
-@using (Html.BeginForm("Index", "BaoCaoThongKe", FormMethod.Post))
-{
-    <p>
-        date <input type="date" name="startDate" />
 
-        <input type="submit" value="Filter" />
-    </p>
-}
 @using (Html.BeginForm("ThongKeThangNam", "BaoCaoThongKe", FormMethod.Post))
 {
     <p>
@@ -33,19 +26,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TenHoaDon)
+            Tên hóa đơn
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TongTien)
+            Tổng tiền
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GhiChu)
+            Ghi chú
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NgayTao)
+            Ngày tạo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ve1.TenVe)
+            Tên vé
         </th>
         <th></th>
     </tr>

@@ -17,8 +17,8 @@ namespace Quanlyrapchieuphim.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ve1()
         {
-            this.HoaDons = new HashSet<HoaDon>();
             this.DV_VE = new HashSet<DV_VE>();
+            this.HoaDons = new HashSet<HoaDon>();
         }
     
         public int IDVe { get; set; }
@@ -30,10 +30,10 @@ namespace Quanlyrapchieuphim.Models
         public Nullable<int> IDNguoiDung { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DV_VE> DV_VE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
         public virtual SuatChieu SuatChieu { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DV_VE> DV_VE { get; set; }
     }
 }

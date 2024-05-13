@@ -103,7 +103,7 @@
                 <p>Thể loại: @item.TheLoai</p>
                 <p>Thời lượng: @item.ThoiLuong phút</p>
                 <div class="button-container">
-                    <button onclick="location.href='@Url.Action("DatVe", "Phim", new { id = item.IDPhim })'">ĐẶT VÉ</button>
+                    <button onclick="location.href='@Url.Action("ChiTietPhim", "Home", new { id = item.IDPhim })'">ĐẶT VÉ</button>
                     <button onclick="window.location.href='@Url.Action("ChiTietPhim", "Home", new { id = item.IDPhim })'" class="btn btn-danger">CHI TIẾT PHIM</button>
 
                 </div>

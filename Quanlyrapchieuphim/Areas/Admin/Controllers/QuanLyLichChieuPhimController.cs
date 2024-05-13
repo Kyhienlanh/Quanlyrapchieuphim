@@ -21,42 +21,50 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
         {
             ViewBag.IDPhongChieu = new SelectList(db.PhongChieux, "IDPhongChieu", "TenPhongChieu");
             ViewBag.IDPhim = new SelectList(db.Phims, "IDPhim", "TenPhim");
-          
+
             return View();
         }
-
-
 
         [HttpPost]
         public ActionResult Create(SuatChieu suatChieu)
         {
             if (ModelState.IsValid)
             {
+                var existingScreenings = db.SuatChieux
+                                    .Where(s => s.NgayChieu == suatChieu.NgayChieu &&
+                                                s.ThoiGianChieu == suatChieu.ThoiGianChieu &&
+                                                s.IDPhongChieu == suatChieu.IDPhongChieu)
+                                    .ToList();
+
+                if (existingScreenings.Any())
+                {
+                    ViewBag.Message = "Bị trùng lịch";
+                    ViewBag.IDPhongChieu = new SelectList(db.PhongChieux, "IDPhongChieu", "TenPhongChieu");
+                    ViewBag.IDPhim = new SelectList(db.Phims, "IDPhim", "TenPhim");
+                    return View();
+                }
 
                 db.SuatChieux.Add(suatChieu);
-              
+                db.SaveChanges();
                 for (int i = 1; i <= 50; i++)
                 {
                     ChoNgoi__SuatChieu a = new ChoNgoi__SuatChieu();
-                  
                     a.IDSuatChieu = suatChieu.IDSuatChieu;
                     a.IDChoNgoi = i;
                     db.ChoNgoi__SuatChieu.Add(a);
-                    db.SaveChanges();
 
                     Ve1 ve = new Ve1();
                     ve.IDChoNgoi_SuatChieu = a.ChoNgoi_SuatChieu;
                     ve.GiaVe = 70000;
                     ve.TenVe = suatChieu.TenSuatChieu;
                     db.Ve1.Add(ve);
-                 
                 }
-                db.SaveChanges();
 
-                return RedirectToAction("index");
+                db.SaveChanges(); // Save the added ChoNgoi__SuatChieu and Ve1 entities
+
+                return RedirectToAction("Index");
             }
             return View(suatChieu);
-
         }
 
         [HttpGet]
