@@ -1,170 +1,88 @@
 ﻿@{
     Layout = null;
 }
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
     <title>Register</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style media="screen">
+    <style>
         body {
-            background-color: #080710;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
 
-        .background {
-            width: 430px;
-            height: 520px;
-            position: absolute;
-            transform: translate(-50%,-50%);
-            left: 50%;
-            top: 50%;
-        }
-
-            .background .shape {
-                height: 200px;
-                width: 200px;
-                position: absolute;
-                border-radius: 50%;
-            }
-
-        .shape:first-child {
-            background: linear-gradient( #1845ad, #23a2f6 );
-            left: -80px;
-            top: -80px;
-        }
-
-        .shape:last-child {
-            background: linear-gradient( to right, #ff512f, #f09819 );
-            right: -30px;
-            bottom: -80px;
-        }
-
-        form {
-            height: 480px; /* Giảm chiều cao để làm cho nằm trong border */
-            width: 400px;
-            background-color: rgba(255,255,255,0.13);
-            position: absolute;
-            transform: translate(-50%,-50%);
-            top: 50%;
-            left: 50%;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255,255,255,0.1);
-            box-shadow: 0 0 40px rgba(8,7,16,0.6);
-            padding: 40px 35px; /* Giảm padding để giảm khoảng cách giữa các phần tử */
-            color: #ffffff;
-        }
-
-            form * {
-                font-family: 'Poppins',sans-serif;
-                color: #ffffff;
-                letter-spacing: 0.5px;
-                outline: none;
-                border: none;
-            }
-
-            form h3 {
-                font-size: 32px;
-                font-weight: 500;
-                line-height: 42px;
-                text-align: center;
-            }
-
-        label {
-            display: block;
-            margin-top: 20px; /* Giảm margin-top của label */
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        input {
-            display: block;
-            height: 23px; /* Giảm chiều cao của input */
-            width: 100%;
-            background-color: rgba(255,255,255,0.07);
-            border-radius: 3px;
-            padding: 0 10px;
-            margin-top: 8px;
-            font-size: 14px;
-            font-weight: 300;
-            color: #ffffff;
-        }
-
-        ::placeholder {
-            color: #e5e5e5;
-        }
-
-        button {
-            margin-top: 20px; /* Giảm margin-top của button */
-            width: 100%;
-            background-color: #ffffff;
-            color: #080710;
-            padding: 15px 0;
-            font-size: 18px;
-            font-weight: 600;
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
             border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+        .control-label {
+            font-weight: bold;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
             cursor: pointer;
+            border-radius: 4px;
         }
 
-        .social {
-            margin-top: 20px; /* Giảm margin-top của social */
-            display: flex;
-        }
-
-            .social div {
-                background: red;
-                width: 150px;
-                border-radius: 3px;
-                padding: 5px 10px 10px 5px;
-                background-color: rgba(255,255,255,0.27);
-                color: #eaf0fb;
-                text-align: center;
+            .btn:hover {
+                background-color: #0056b3;
             }
-
-                .social div:hover {
-                    background-color: rgba(255,255,255,0.47);
-                }
-
-            .social .fb {
-                margin-left: 25px;
-            }
-
-            .social i {
-                margin-right: 4px;
-            }
-            
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="background">
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-        <form>
-            <h3 style="font-size:35px;">ĐĂNG KÝ</h3>
-            <label for="Username">Tên:</label>
-            <input type="text" id="Username" placeholder="">
-            <label for="sdt">Số điện thoại:</label>
-            <input type="text" id="sdt" placeholder="">
-            <label for="Email">Email:</label>
-            <input type="text" id="Email" placeholder="">
-            <label for="MatKhau">Mật khẩu:</label>
-            <input type="password" id="MatKhau" placeholder="">
-            <label for="NhapLaiMatKhau">Nhập lại mật khẩu:</label>
-            <input type="password" id="NhapLaiMatKhau" placeholder="">
-            <button type="submit">ĐĂNG KÝ</button>
-           
-        </form>
-    </div>
+        @using (Html.BeginForm("register", "Login", FormMethod.Post))
+        {
+            <label class="control-label">Tên:</label>
+            @Html.TextBox("Username", null, new { @class = "form-control" })
+            <label class="control-label">Số điện thoại:</label>
+            @Html.TextBox("sdt", null, new { @class = "form-control" })
+            <label class="control-label">Email:</label>
+            @Html.TextBox("Email", null, new { @class = "form-control" })
+            <label class="control-label">Mật khẩu:</label>
+            @Html.Password("MatKhau", null, new { @class = "form-control" })
+            <label class="control-label">Nhập lại Mật khẩu:</label>
+            @Html.Password("NhapLaiMatKhau", null, new { @class = "form-control" })
+
+
+
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+
+        }
+        @if (Request.HttpMethod == "POST")
+        {
+            // Render confirmEmail action result if form was submitted
+            @Html.Action("confirmEmail")
+        }
+
 </body>
 </html>
-
-
-
-
-
-
-
