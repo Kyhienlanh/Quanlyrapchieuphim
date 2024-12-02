@@ -30,11 +30,12 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Kiểm tra xem suất chiếu có bị trùng không
                 var existingScreenings = db.SuatChieux
-                                    .Where(s => s.NgayChieu == suatChieu.NgayChieu &&
-                                                s.ThoiGianChieu == suatChieu.ThoiGianChieu &&
-                                                s.IDPhongChieu == suatChieu.IDPhongChieu)
-                                    .ToList();
+                                        .Where(s => s.NgayChieu == suatChieu.NgayChieu &&
+                                                    s.ThoiGianChieu == suatChieu.ThoiGianChieu &&
+                                                    s.IDPhongChieu == suatChieu.IDPhongChieu)
+                                        .ToList();
 
                 if (existingScreenings.Any())
                 {
@@ -44,26 +45,50 @@ namespace Quanlyrapchieuphim.Areas.Admin.Controllers
                     return View();
                 }
 
+                // Thêm suất chiếu vào cơ sở dữ liệu
                 db.SuatChieux.Add(suatChieu);
                 db.SaveChanges();
+
+                // Tạo danh sách cho ngồi và vé
+                List<ChoNgoi__SuatChieu> choNgoiList = new List<ChoNgoi__SuatChieu>();
+                List<Ve1> veList = new List<Ve1>();
+
                 for (int i = 1; i <= 50; i++)
                 {
-                    ChoNgoi__SuatChieu a = new ChoNgoi__SuatChieu();
-                    a.IDSuatChieu = suatChieu.IDSuatChieu;
-                    a.IDChoNgoi = i;
-                    db.ChoNgoi__SuatChieu.Add(a);
-
-                    Ve1 ve = new Ve1();
-                    ve.IDChoNgoi_SuatChieu = a.ChoNgoi_SuatChieu;
-                    ve.GiaVe = 70000;
-                    ve.TenVe = suatChieu.TenSuatChieu;
-                    db.Ve1.Add(ve);
+                    // Tạo đối tượng ChoNgoi__SuatChieu
+                    ChoNgoi__SuatChieu choNgoi = new ChoNgoi__SuatChieu
+                    {
+                        IDSuatChieu = suatChieu.IDSuatChieu,
+                        IDChoNgoi = i
+                    };
+                    choNgoiList.Add(choNgoi);
                 }
 
-                db.SaveChanges(); // Save the added ChoNgoi__SuatChieu and Ve1 entities
+                // Thêm tất cả các chỗ ngồi vào cơ sở dữ liệu và lưu
+                db.ChoNgoi__SuatChieu.AddRange(choNgoiList);
+                db.SaveChanges();
+
+                // Lấy lại danh sách chỗ ngồi sau khi đã lưu để đảm bảo có ID chính xác
+                foreach (var choNgoi in choNgoiList)
+                {
+                    Ve1 ve = new Ve1
+                    {
+                        IDChoNgoi_SuatChieu = choNgoi.ChoNgoi_SuatChieu, // ID đã tồn tại
+                        GiaVe = 70000,
+                        TenVe = suatChieu.TenSuatChieu
+                    };
+                    veList.Add(ve);
+                }
+
+                // Thêm tất cả các vé vào cơ sở dữ liệu
+                db.Ve1.AddRange(veList);
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
+
+            ViewBag.IDPhongChieu = new SelectList(db.PhongChieux, "IDPhongChieu", "TenPhongChieu");
+            ViewBag.IDPhim = new SelectList(db.Phims, "IDPhim", "TenPhim");
             return View(suatChieu);
         }
 

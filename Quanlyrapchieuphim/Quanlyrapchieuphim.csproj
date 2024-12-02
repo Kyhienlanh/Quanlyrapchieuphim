@@ -405,6 +405,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\cinemasHKL - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\framework-8f8dab598177bbf8.js" />
     <Content Include="Scripts\index-d824a32c9ab87178.js" />

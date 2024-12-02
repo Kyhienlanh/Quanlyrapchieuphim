@@ -98,7 +98,7 @@
         @foreach (var item in Model)
         {
             <div class="phim-item">
-                <img src="~/Images/@item.TenAnh" alt="Hình ảnh" />
+                <img src="@item.TenAnh" alt="Hình ảnh" />
                 <h3>@item.TenPhim</h3>
                 <p>Thể loại: @item.TheLoai</p>
                 <p>Thời lượng: @item.ThoiLuong phút</p>
